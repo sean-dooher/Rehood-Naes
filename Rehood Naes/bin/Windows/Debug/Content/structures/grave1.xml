@@ -1,0 +1,11 @@
+﻿<Structure>
+	<ID>grave1</ID>
+	<Element>
+		<Position>0,0</Position>
+		<Rectangle>642,801,61,94</Rectangle>
+		<spritesheet>obj_misk_atlas</spritesheet>
+	</Element>
+	<Bounds>
+		<Box>23,0,14,6</Box>
+	</Bounds>
+</Structure>

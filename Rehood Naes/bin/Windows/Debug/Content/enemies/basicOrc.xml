@@ -1,0 +1,20 @@
+﻿<Entity>
+	<Base>orc</Base>
+	<Spritesheet>spear_male</Spritesheet>
+	<CurrentHealth>30</CurrentHealth>
+	<MaxHealth>30</MaxHealth>
+	<Strength>30</Strength>
+	<Regen>2.5</Regen>
+	<Size>30,46</Size>
+	<Offset>17,16</Offset>
+	<HealthBar>
+		<FrontColor>57,255,20</FrontColor>
+		<BackColor>255,0,9</BackColor>
+		<Size>30,5</Size>
+		<Buffer>1</Buffer>
+	</HealthBar>
+	<Frame>
+		<Enum type="SpriteState">Attack</Enum>
+		<Value>7,4</Value>
+	</Frame>
+</Entity>

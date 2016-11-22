@@ -1,0 +1,5 @@
+﻿<Button>
+	<Size>195,72</Size>
+	<Image>button1</Image>
+	<Hover>button1_hover</Hover>
+</Button>

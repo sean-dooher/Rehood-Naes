@@ -1,0 +1,11 @@
+﻿<Structure>
+  <ID>sink</ID>
+  <Element>
+    <Position>0,0</Position>
+    <Rectangle>64,103,96,51</Rectangle>
+    <spritesheet>interior</spritesheet>
+  </Element>
+	<Bounds>
+		<Box>0,0,96,14</Box>
+	</Bounds>
+</Structure>

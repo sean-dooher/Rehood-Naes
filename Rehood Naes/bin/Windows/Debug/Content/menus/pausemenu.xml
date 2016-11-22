@@ -1,0 +1,34 @@
+﻿<Menu>
+	<Spritesheet>button1</Spritesheet>
+	<Spritesheet>button1_hover</Spritesheet>
+	<Button>
+		<ButtonID>button1</ButtonID>
+		<Position>555,65</Position>
+		<Text>Resume</Text>
+		<Method>exit</Method>
+	</Button>
+	<Button>
+		<ButtonID>button1</ButtonID>
+		<Position>555,150</Position>
+		<Text>Save Game</Text>
+		<Method>saveGame</Method>
+	</Button>
+	<Button>
+		<ButtonID>button1</ButtonID>
+		<Position>555,235</Position>
+		<Text>Load Game</Text>
+		<Method>loadGame</Method>
+	</Button>
+		<Button>
+		<ButtonID>button1</ButtonID>
+		<Position>555,315</Position>
+		<Text>Options</Text>
+		<Method>openOptions</Method>
+	</Button>
+	<Button>
+		<ButtonID>button1</ButtonID>
+		<Position>555,395</Position>
+		<Text>Exit</Text>
+		<Method>exitGame</Method>
+	</Button>
+</Menu>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/characters/orc_body.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/characters/skeleton_body.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/characters/spear_male.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/characters/spider_black.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/fonts/Arial.spritefont</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/menus/buttons/button1.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/menus/buttons/button1_hover.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/body.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/boots1.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/dagger1.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/hair1.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/pants1.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/torso1.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/sound/music/himitsuKichi.wma</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/sound/music/nagisaSaka.wma</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/base_out_atlas.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/build_atlas.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/caves.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/inside.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/interior.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/obj_misk_atlas.png</File>
+    <File>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/spritesheets/terrain_atlas.png</File>
+  </SourceFiles>
+</SourceFileCollection>

@@ -1,0 +1,16 @@
+﻿<Structure>
+	<ID>tree2</ID>
+	<Element>
+		<Position>13,67</Position>
+		<Rectangle>816,608,64,73</Rectangle>
+		<spritesheet>base_out_atlas</spritesheet>
+	</Element>
+	<Element>
+		<Position>0,0</Position>
+		<Rectangle>769,384,94,80</Rectangle>
+		<spritesheet>base_out_atlas</spritesheet>
+	</Element>
+	<Bounds>
+		<Box>0,0,94,80</Box>
+	</Bounds>
+</Structure>

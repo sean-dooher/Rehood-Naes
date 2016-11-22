@@ -1,0 +1,8 @@
+﻿<Structure>
+  <ID>bow_wall</ID>
+  <Element>
+    <Position>0,0</Position>
+    <Rectangle>224,32,32,32</Rectangle>
+    <spritesheet>interior</spritesheet>
+  </Element>
+</Structure>
