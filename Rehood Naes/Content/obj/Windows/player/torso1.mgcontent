@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/player/torso1.png</SourceFile>
+  <SourceFile>C:/Users/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/torso1.png</SourceFile>
   <SourceTime>2014-06-09T16:57:56-07:00</SourceTime>
-  <DestFile>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/bin/Windows/player/torso1.xnb</DestFile>
-  <DestTime>2016-10-10T01:24:15.368573-07:00</DestTime>
+  <DestFile>C:/Users/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/bin/Windows/player/torso1.xnb</DestFile>
+  <DestTime>2016-11-24T14:56:44.6977174-08:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-29T23:36:08-07:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
@@ -26,6 +26,10 @@
   </Parameters>
   <Parameters>
     <Key>ResizeToPowerOfTwo</Key>
+    <Value>False</Value>
+  </Parameters>
+  <Parameters>
+    <Key>MakeSquare</Key>
     <Value>False</Value>
   </Parameters>
   <Parameters>

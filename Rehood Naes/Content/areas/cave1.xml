@@ -4,7 +4,7 @@
 		<SheetID>caves</SheetID>
 	</Sheets>
 	<BGM>
-		<MusicID>himitsuKichi</MusicID>
+		<MusicID>None</MusicID>
 		<Loop>true</Loop>
 	</BGM>
 	<Menu>pausemenu</Menu>

@@ -5,7 +5,7 @@
 		<SheetID>build_atlas</SheetID>
 	</Sheets>
 	<BGM>
-		<MusicID>nagisaSaka</MusicID>
+		<MusicID>None</MusicID>
 		<Loop>true</Loop>
 	</BGM>
 	<Menu>pausemenu</Menu>

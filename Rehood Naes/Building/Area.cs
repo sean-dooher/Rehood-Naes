@@ -23,7 +23,6 @@ namespace Rehood_Naes.Building
 	public class Area : IDrawable
 	{
 		#region Fields
-		private Player user;
 		private Menu menu;
 		private List<IDrawable> drawElements;
 		private List<Entity> entities;
@@ -32,13 +31,15 @@ namespace Rehood_Naes.Building
 		private ContentManager Content;
 		private GraphicsDevice graphics;
 		private Song background;
-		#endregion
-		
-		#region Properties
-		/// <summary>
-		/// Last state of keyboard
-		/// </summary>
-		public KeyboardState LastKeyboard;
+        #endregion
+
+        #region Properties
+        public static Dictionary<string, Area> VisitedAreas = new Dictionary<string, Area>();
+
+        /// <summary>
+        /// Last state of keyboard
+        /// </summary>
+        public KeyboardState LastKeyboard;
 		
 		/// <summary>
 		/// Last state of Mouse
@@ -50,7 +51,7 @@ namespace Rehood_Naes.Building
 		/// </summary>
 		public Player User
 		{
-			get { return user; }
+			get { return RPG.player; }
 		}
 		
 		/// <summary>
@@ -88,29 +89,15 @@ namespace Rehood_Naes.Building
 		
 		#region Constructors
 		/// <summary>
-		/// Creates a new area and loads player into it.
-		/// </summary>
-		/// <param name="elementList">List of elements the area contains</param>
-		public Area(List<IDrawable> elementList)
-		{
-			this.Content = RPG.ContentManager;
-			graphics = RPG.GraphicsManager.GraphicsDevice;
-			//user = RPG.player;
-			drawElements = new List<IDrawable>(elementList);
-			//user.CurrentArea = this;
-		}
-		
-		/// <summary>
 		/// Loads an area from a specified ID
 		/// </summary>
 		/// <param name="areaID"></param>
 		public Area(string areaID)
 		{
-			user = RPG.player;
 			graphics = RPG.GraphicsManager.GraphicsDevice;
 			this.Content = RPG.ContentManager;
 			loadArea(areaID);
-			user.CurrentArea = this;
+            Area.VisitedAreas[areaID] = this;
 		}
 		#endregion
 		
@@ -140,7 +127,7 @@ namespace Rehood_Naes.Building
 			if(!menu.isShowing) //don't update if menu is shown
 			{	
 				drawElements.ForEach(element => element.Update(gameTime));//update elements
-				user.Update(gameTime);
+				User.Update(gameTime);
 				entityUpdates(gameTime);
 			}
 			
@@ -159,9 +146,10 @@ namespace Rehood_Naes.Building
 				foreach(Enemy enemy in entities.Where(entity => entity is Enemy))
 					enemy.Draw(spriteBatch);
 				
-				//boxes.ForEach(box => box.DrawDebug(spriteBatch));
+				if(RPG.DebugMode)
+                    boxes.ForEach(box => box.DrawDebug(spriteBatch));
 				
-				user.Draw(spriteBatch);
+				User.Draw(spriteBatch);
             	menu.Draw(spriteBatch);
 		}
 		
@@ -198,7 +186,7 @@ namespace Rehood_Naes.Building
 			
 			if(entities.Count(ent => ent != entity && ent.Bounds.Intersects(bounds)) > 0)
 				return false;
-			if(!(entity is Player) && bounds.Intersects(user.Bounds))
+			if(!(entity is Player) && bounds.Intersects(User.Bounds))
 				return false;
 			
 			return true;
@@ -214,19 +202,34 @@ namespace Rehood_Naes.Building
 			}
 		}
 		
+        public static Area LoadArea(string areaID)
+        {
+            if (Area.VisitedAreas.Keys.Contains(areaID))
+            {
+                var area = Area.VisitedAreas[areaID];
+                foreach (EventBox box in area.EventBoxes)
+                    box.LoadBox(true);
+                return area;
+            }
+            else
+                return new Area(areaID);
+        }
+
 		/// <summary>
-		/// Replaces current area with new area
+		/// Advances user to next area
 		/// </summary>
 		/// <param name="sender">Object command sent from</param>
 		/// <param name="e">EventArgs that contain position and areaID</param>
 		private void OnNewAreaEnter(Entity sender, BoxArgs e)
 		{
 			//if everything is either dead or in its original position
-			if(entities.Count(entity => entity.State != SpriteState.Die) == 0 ||
-			   entities.Count(entity => (entity.InitialPosition - entity.Position).Length() > 1) == 0)
+			if(entities.Count(entity => entity.State != SpriteState.Die) +
+			   entities.Count(entity => (entity.InitialPosition - entity.Position).Length() > 1) == entities.Count)
 			{
-				user.Position = (e as NewAreaEventArgs).Position;
-				loadArea((e as NewAreaEventArgs).AreaID);
+                foreach (EventBox box in EventBoxes)
+                    box.UnloadBox(true);
+				User.Position = (e as NewAreaEventArgs).Position;
+                User.CurrentArea = LoadArea((e as NewAreaEventArgs).AreaID);
 			}
 		}
 		
@@ -274,7 +277,8 @@ namespace Rehood_Naes.Building
 				sheets.Add(new Spritesheet(element.Value));
 			}
 			
-			if(doc.Descendants("Area").Elements("BGM").Count() > 0) //load bgm if is contained in xml
+			if(doc.Descendants("Area").Elements("BGM").Count() > 0
+                && doc.Descendants("Area").Elements("BGM").First().Element("MusicID").Value != "None") //load bgm if is contained in xml
 			{
 				background = Content.Load<Song>("sound/music/" + doc.Descendants("Area").Elements("BGM").First().Element("MusicID").Value);
 				if(MediaPlayer.State != MediaState.Playing || MediaPlayer.Queue.ActiveSong.Name != background.Name)
@@ -305,7 +309,7 @@ namespace Rehood_Naes.Building
 				Vector2 position = new Vector2(float.Parse(pos[0]), float.Parse(pos[1]));
 				
 				EntitySpawnEventArgs args = new EntitySpawnEventArgs(entityID, name, type, 1, direction, position, bounds);
-				Spawn(user, args);
+				Spawn(User, args);
 			}
 			
 			foreach(XElement element in doc.Descendants("Area").Descendants("Player").Elements("EventBox"))//load player event boxes
@@ -321,7 +325,7 @@ namespace Rehood_Naes.Building
 				{
 					Vector2 position = VectorEx.FromArray(element.Element("Position").Value.Split(','));
 					NewAreaEventArgs args = new NewAreaEventArgs(element.Element("AreaID").Value, position);
-					boxes.Add(new EventBox(user, rect, OnNewAreaEnter, args, condition));
+					boxes.Add(new EventBox(User, rect, OnNewAreaEnter, args, condition));
 				}
 				else if(element.Element("Method").Value == "Spawn")
 				{
@@ -334,7 +338,7 @@ namespace Rehood_Naes.Building
 						new EntitySpawnEventArgs(element.Element("EntityID").Value,
 						                         element.Element("Name").Value, type, maxNum, direction,
 						                         position, RectangleF.FromArray(element.Element("Bounds").Value.Split(',')));
-					boxes.Add(new EventBox(user, rect, Spawn, args, null));
+					boxes.Add(new EventBox(User, rect, Spawn, args, null));
 				}
 			}
 		}

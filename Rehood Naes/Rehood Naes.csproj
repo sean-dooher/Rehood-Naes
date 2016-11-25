@@ -171,8 +171,6 @@
     <Content Include="Content\player\hair1.png" />
     <Content Include="Content\player\pants1.png" />
     <Content Include="Content\player\torso1.png" />
-    <Content Include="Content\sound\music\himitsuKichi.wma" />
-    <Content Include="Content\sound\music\nagisaSaka.wma" />
     <Content Include="Content\spritesheets\base_out_atlas.png" />
     <Content Include="Content\spritesheets\build_atlas.png" />
     <Content Include="Content\spritesheets\caves.png" />
@@ -258,10 +256,9 @@
     <None Include="Content\obj\Windows\spritesheets\interior.mgcontent" />
     <None Include="Content\obj\Windows\spritesheets\obj_misk_atlas.mgcontent" />
     <None Include="Content\obj\Windows\spritesheets\terrain_atlas.mgcontent" />
-    <None Include="Content\sound\music\himitsuKichi.xnb" />
-    <None Include="Content\sound\music\nagisaSaka.xnb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\sound\music\" />
     <Folder Include="Content\sound\sfx\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

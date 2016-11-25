@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/sound/music/nagisaSaka.wma</SourceFile>
+  <SourceFile>C:/Users/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/sound/music/nagisaSaka.wma</SourceFile>
   <SourceTime>2015-05-11T22:38:00-07:00</SourceTime>
-  <DestFile>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/bin/Windows/sound/music/nagisaSaka.xnb</DestFile>
-  <DestTime>2016-10-10T01:24:19.9463809-07:00</DestTime>
+  <DestFile>C:/Users/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/bin/Windows/sound/music/nagisaSaka.xnb</DestFile>
+  <DestTime>2016-11-24T14:53:26.7592292-08:00</DestTime>
   <Importer>WmaImporter</Importer>
   <ImporterTime>2016-03-29T23:36:08-07:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/sean/Desktop/Programming/Rehood Naes/Rehood Naes/Content/bin/Windows/sound/music/nagisaSaka.wma</string>
+    <string>C:/Users/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/bin/Windows/sound/music/nagisaSaka.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

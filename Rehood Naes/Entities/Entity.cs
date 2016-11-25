@@ -122,7 +122,9 @@ namespace Rehood_Naes.Entities
 		public Area CurrentArea
 		{
 			get { return currentArea; }
-			set { currentArea = value; }
+			set {
+                currentArea = value;
+            }
 		}
 			
 		/// <summary>

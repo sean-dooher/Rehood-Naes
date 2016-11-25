@@ -18,7 +18,6 @@ namespace Rehood_Naes
     public class RPG : Game
     {
     	#region Fields
-        private Area currentArea;
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private static bool loadNewGame;
@@ -110,17 +109,18 @@ namespace Rehood_Naes
         {
         	if(loadNewGame)
             {
+                //TODO: Make this less hacky, actually read in data from a file
             	player = new Player(null, new Vector2(514, 218), "Sean", "defaultPlayer");
-            	currentArea = new Area("house_inside");
+            	player.CurrentArea = new Area("house_inside");
             	loadNewGame = false;
             }
         	if(IsActive)
         	{
         		if(MediaPlayer.State == MediaState.Paused) MediaPlayer.Resume();
         		this.IsMouseVisible = MouseVisible;
-        		currentArea.Update(gameTime);
+        		player.CurrentArea.Update(gameTime);
             	base.Update(gameTime);
-            	this.Window.Title = "Player coordinates: " + currentArea.User.Position;
+            	this.Window.Title = "Player coordinates: " + player.Position;
         	}
         	else
         	{
@@ -136,7 +136,7 @@ namespace Rehood_Naes
         {
         	GraphicsDevice.Clear(Color.Black);
         	spriteBatch.Begin(); //begin drawing
-            currentArea.Draw(spriteBatch);
+            player.CurrentArea.Draw(spriteBatch);
             spriteBatch.End(); //end drawing
             base.Draw(gameTime);
         }
