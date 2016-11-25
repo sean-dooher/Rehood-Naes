@@ -223,8 +223,8 @@ namespace Rehood_Naes.Building
 		private void OnNewAreaEnter(Entity sender, BoxArgs e)
 		{
 			//if everything is either dead or in its original position
-			if(entities.Count(entity => entity.State != SpriteState.Die) +
-			   entities.Count(entity => (entity.InitialPosition - entity.Position).Length() > 1) == entities.Count)
+			if(entities.Count(entity => entity.State == SpriteState.Die) +
+			   entities.Count(entity => (entity.InitialPosition - entity.Position).Length() <= 1) == entities.Count)
 			{
                 foreach (EventBox box in EventBoxes)
                     box.UnloadBox(true);

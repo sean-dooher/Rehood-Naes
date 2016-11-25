@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Rehood_Naes.Building;
 using Rehood_Naes.Entities;
+using System.Collections.Generic;
 
 namespace Rehood_Naes
 {
@@ -111,6 +112,7 @@ namespace Rehood_Naes
             {
                 //TODO: Make this less hacky, actually read in data from a file
             	player = new Player(null, new Vector2(514, 218), "Sean", "defaultPlayer");
+                Area.VisitedAreas = new Dictionary<string, Area>();
             	player.CurrentArea = new Area("house_inside");
             	loadNewGame = false;
             }

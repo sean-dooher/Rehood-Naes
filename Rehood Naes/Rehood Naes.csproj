@@ -51,6 +51,7 @@
     <Compile Include="Entities\Equipment\Effect.cs" />
     <Compile Include="Entities\Equipment\Weapon.cs" />
     <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\StorageContainer.cs" />
     <Compile Include="Events\BoxArgs.cs" />
     <Compile Include="Events\EventBox.cs" />
     <Compile Include="Interfaces\Extensions.cs" />
