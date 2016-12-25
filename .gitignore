@@ -12,6 +12,7 @@
 *_i.c
 *_p.c
 *.ncb
+*.v11.suo
 *.suo
 *.tlb
 *.tlh
