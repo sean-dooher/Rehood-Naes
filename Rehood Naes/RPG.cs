@@ -81,7 +81,6 @@ namespace Rehood_Naes
             graphics.PreferredBackBufferWidth = WINDOW_WIDTH; //width of screen
             graphics.ApplyChanges();
             base.Initialize();
-            (Form.FromHandle(Window.Handle) as Form).FormClosing += CloseProgram;
         }
 
         /// <summary>
@@ -143,21 +142,6 @@ namespace Rehood_Naes
             base.Draw(gameTime);
         }
         #endregion
-        /// <summary>
-        /// Closes the program
-        /// </summary>
-        /// <param name="sender">Object command sent from</param>
-        /// <param name="e">Arguments for the form closing</param>
-        public static void CloseProgram(object sender, FormClosingEventArgs e)
-        {
-
-        	if(MessageBox.Show("Are you sure you want to exit to Windows?",
-        	                   "Close game", MessageBoxButtons.YesNo) == DialogResult.Yes)
-        	{
-        		Process.GetProcesses().First(pro => pro.ProcessName == Process.GetCurrentProcess().ProcessName).Kill();
-        	}
-            else e.Cancel = true;
-        }
         
         /// <summary>
         /// Tells game to restart/load a new game

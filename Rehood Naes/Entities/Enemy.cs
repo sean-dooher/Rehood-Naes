@@ -20,21 +20,10 @@ namespace Rehood_Naes.Entities
 	{
 		#region Fields
 		private const int cooldown = 90; //sets default cooldown
-		private string enemyID;
 		private string path;
 		private int currentCD;
 		private SpriteDirection startDirection;
 		private RectangleF walkLimit;
-		#endregion
-		
-		#region Properties
-		/// <summary>
-		/// Represents ID of enemy
-		/// </summary>
-		public override string EntityID 
-		{
-			get { return enemyID; }
-		}
 		#endregion
 		
 		#region Constructors
@@ -47,9 +36,8 @@ namespace Rehood_Naes.Entities
 		/// <param name="enemyID">ID of enemy</param>
 		/// <param name="direction">Default direction enemy faces</param>
 		/// <param name="bounds">Area that enemy can move in</param>
-		public Enemy(Area currentArea, Vector2 position, string name, string enemyID, SpriteDirection direction, RectangleF bounds) : base(currentArea, position, name)
+		public Enemy(Area currentArea, Vector2 position, string name, string enemyID, SpriteDirection direction, RectangleF bounds) : base(currentArea, position, name, enemyID)
 		{
-			this.enemyID = enemyID;
 			path = AppDomain.CurrentDomain.BaseDirectory + @"Content\enemies\" + enemyID + ".xml";
 			
 			walkLimit = new RectangleF(bounds.Location, bounds.Size);

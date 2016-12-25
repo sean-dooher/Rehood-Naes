@@ -29,6 +29,7 @@ namespace Rehood_Naes.Entities
 		private Vector2 offset;
 		private Area currentArea;
 		private ProgressBar healthBar;
+        private string entityID;
 		
 		/// <summary>
 		/// Last position of entity
@@ -132,16 +133,17 @@ namespace Rehood_Naes.Entities
 		/// </summary>
 		public string EntityName
 		{
-			get; private set;
+			get; protected set;
 		}
 		
 		/// <summary>
 		/// Identifier unique for entity type
 		/// </summary>
-		public abstract string EntityID
+		public string EntityID
 		{
-			get;
-		}
+			get { return entityID; }
+            private set { entityID = value; }
+        }
 		
 		/// <summary>
 		/// Max health of entity
@@ -180,9 +182,10 @@ namespace Rehood_Naes.Entities
 		/// <param name="startingArea">Area to load entity in</param>
 		/// <param name="position">Position of entity</param>
 		/// <param name="name">Name of entity</param>
-		protected Entity(Area startingArea, Vector2 position, string name)
+		protected Entity(Area startingArea, Vector2 position, string name, string entityID)
 		{
 			EntityName = name;
+            EntityID = entityID;
 			Content = RPG.ContentManager;
 			initalPosition = position;
 			lastPos = new Vector2(position.X,position.Y);
@@ -258,7 +261,10 @@ namespace Rehood_Naes.Entities
 		/// <param name="entities">Entities to try to attack</param>
 		public void TryAttack(List<Entity> entities)
 		{
-			entities.ForEach(entity => TryAttack(entity));
+			foreach (Entity entity in entities) 
+			{
+				TryAttack (entity);
+			}
 		}
 		
 		/// <summary>
@@ -321,12 +327,10 @@ namespace Rehood_Naes.Entities
 				healthBar.Draw(spriteBatch);
 			if(RPG.DebugMode)
 			{
-				List<Tile> debugTiles = new List<Tile>();
-				debugTiles.Add(new Tile(new Rectangle((int)Bounds.Left, (int)Bounds.Top, (int)Bounds.Width, 1), "black1"));
-				debugTiles.Add(new Tile(new Rectangle((int)Bounds.Left, (int)Bounds.Top, 1, (int)Bounds.Height), "black1"));
-				debugTiles.Add(new Tile(new Rectangle((int)Bounds.Left, (int)Bounds.Bottom, (int)Bounds.Width, 1), "black1"));
-				debugTiles.Add(new Tile(new Rectangle((int)Bounds.Right, (int)Bounds.Top, 1, (int)Bounds.Height), "black1"));
-				debugTiles.ForEach(tile => tile.Draw(spriteBatch));
+				(new Tile(new Rectangle((int)Bounds.Left, (int)Bounds.Top, (int)Bounds.Width, 1), "black1")).Draw(spriteBatch);
+				(new Tile(new Rectangle((int)Bounds.Left, (int)Bounds.Top, 1, (int)Bounds.Height), "black1")).Draw(spriteBatch);
+				(new Tile(new Rectangle((int)Bounds.Left, (int)Bounds.Bottom, (int)Bounds.Width, 1), "black1")).Draw(spriteBatch);
+				(new Tile (new Rectangle ((int)Bounds.Right, (int)Bounds.Top, 1, (int)Bounds.Height), "black1")).Draw(spriteBatch);
 			}
 		}
 

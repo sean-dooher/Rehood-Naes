@@ -82,4 +82,12 @@
 		<ID>spider_black</ID>
 		<Path>characters/spider_black</Path>
 	</Spritesheet>
+	<Spritesheet>
+		<ID>slot</ID>
+		<Path>menus/containers/slot</Path>
+	</Spritesheet>
+	<Spritesheet>
+		<ID>gray_rounded</ID>
+		<Path>menus/gray_rounded</Path>
+	</Spritesheet>
 </List>

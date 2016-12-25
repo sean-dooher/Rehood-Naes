@@ -17,6 +17,7 @@ namespace Rehood_Naes.Interfaces
 		#region Field
 		private string sheetID;
 		Texture2D sheet;
+		private static Dictionary<string, Spritesheet> sheets;
 		#endregion		
 		
 		#region Properties
@@ -55,9 +56,17 @@ namespace Rehood_Naes.Interfaces
 		/// <param name="spriteID">ID to load</param>
 		public Spritesheet(string spriteID)
 		{
+			try
+			{
+				sheets.Count();
+			}
+			catch
+			{
+				sheets = new Dictionary<string, Spritesheet> ();
+			}
 			XDocument listDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"Content/spritesheets/sheets.xml");
 			string path = listDoc.Descendants("List").Elements("Spritesheet").First(element => element.Element("ID").Value == spriteID).Element("Path").Value;			
-			sheet = RPG.ContentManager.Load<Texture2D>(path);
+			sheet = sheets.ContainsKey(spriteID) ? sheets[spriteID].Sheet : RPG.ContentManager.Load<Texture2D>(path);
 			this.sheetID = spriteID;
 		}
 		#endregion

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Rehood_Naes.Entities.Equipment
 {
-    class Weapon
+    /*class Weapon : Item
     {
-    }
+    }*/
 }

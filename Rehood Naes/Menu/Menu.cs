@@ -90,7 +90,7 @@ namespace Rehood_Naes.Menus
 		
 		private void exitGame(object sender, MouseState mouse)
 		{
-			RPG.CloseProgram(this, new FormClosingEventArgs(CloseReason.UserClosing, false));
+			MessageBox.Show ("NOT IMPLEMENTED");
 		}
 		
 		private void loadMenu(string menuID)

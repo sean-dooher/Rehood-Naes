@@ -5,25 +5,21 @@ using System.Text;
 
 namespace Rehood_Naes.Entities.Equipment
 {
-    struct Armor
+    /*public class Armor : Item
     {
         #region Fields
         #endregion
 
         #region Properties
-        /*public List<Effect> Effects
+        public List<Effect> Effects
         {
             get;
             private set;
-        }*/
-        #endregion
-
-        #region Constructors
-        public Armor(int a)
-        {
-            
         }
         #endregion
 
-    }
+        #region Constructors
+        #endregion
+
+    }*/
 }

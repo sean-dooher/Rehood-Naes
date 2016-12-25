@@ -66,6 +66,7 @@ namespace Rehood_Naes.Entities
 			Number
 		}
 		#endregion
+
 		#region Fields
 		private double baseSpeed;
 		private double speed; //speed of animation (Default .25x)
@@ -77,7 +78,8 @@ namespace Rehood_Naes.Entities
 		private SpriteState currentState; 
 		private SpriteDirection currentDirection;
 		private Dictionary<Enum, int[]> frames;//dictionary of frames for current figure
-		private List<Tuple<Spritesheet, bool>> spriteSheets; //list of spritesheets paired with whether it is a base sheet or not
+		private List<Spritesheet> baseSheets;
+		private List<Spritesheet> secondarySheets; //list of spritesheets paired with whether it is a base sheet or not
 		#endregion
 		
 		#region Properties		
@@ -161,8 +163,9 @@ namespace Rehood_Naes.Entities
 		/// <param name="sheets">New spritesheets used to draw</param>
 		public void UpdateSpriteSheets(List<Spritesheet> sheets)
 		{
-			spriteSheets = spriteSheets.Where(tuple => tuple.Item2 == true).ToList();
-			sheets.ForEach(sheet => spriteSheets.Add(new Tuple<Spritesheet, bool>(sheet, false)));
+			//resets secondary sheets and adds from input
+			secondarySheets = new List<Spritesheet>();
+			secondarySheets.AddRange (sheets);
 		}
 		
 		/// <summary>
@@ -237,15 +240,15 @@ namespace Rehood_Naes.Entities
 			Rectangle sourceRec = new Rectangle((int)currentColumn * (int)size.X, (int)currentRow * (int)size.Y, (int)size.X, (int)size.Y);
 					
 			//draw base textures first
-			foreach(Tuple<Spritesheet, bool> sheet in spriteSheets.Where(tuple => tuple.Item2))
+			foreach(Spritesheet sheet in baseSheets)
 			{
-				spriteBatch.Draw(sheet.Item1.Sheet, position, sourceRec, Color.White);
+				spriteBatch.Draw(sheet.Sheet, position, sourceRec, Color.White);
 			}
 			
 			//then draw non-base textures
-			foreach(Tuple<Spritesheet, bool> sheet in spriteSheets.Where(tuple => !tuple.Item2))
+			foreach(Spritesheet sheet in secondarySheets)
 			{
-				spriteBatch.Draw(sheet.Item1.Sheet, position, sourceRec, Color.White);
+				spriteBatch.Draw(sheet.Sheet, position, sourceRec, Color.White);
 			}
 		}
 		#endregion
@@ -255,7 +258,8 @@ namespace Rehood_Naes.Entities
 		                                              List<Spritesheet> defaultSheets = null)
 		{
 			frames = new Dictionary<Enum, int[]>();
-			spriteSheets = new List<Tuple<Spritesheet, bool>>();
+			baseSheets = new List<Spritesheet>();
+			secondarySheets = new List<Spritesheet>();
 			XDocument charDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"Content/characters/" + characterID + ".xml");
 			
 			//set speed values from xml file
@@ -268,16 +272,16 @@ namespace Rehood_Naes.Entities
 			
 			//set spritesheets
 			if(defaultSheets != null)
-				defaultSheets.ForEach(sheet => spriteSheets.Add(new Tuple<Spritesheet, bool>(sheet, false)));
+				defaultSheets.ForEach(sheet => secondarySheets.Add(sheet));
 			
 			//loads individual sheets in character file
 			foreach(XElement element in charDoc.Descendants("Character").Elements("Spritesheet"))
-				spriteSheets.Add(new Tuple<Spritesheet, bool>(new Spritesheet(element.Value), true));
+				baseSheets.Add(new Spritesheet(element.Value));
 			
 			//loads spritelist in character file
 			if(charDoc.Descendants("Character").Elements("SpriteList").Count() > 0)
 				Spritesheet.LoadList(charDoc.Descendants("Character").Elements("SpriteList").First().Value)
-					.ForEach(sheet => spriteSheets.Add(new Tuple<Spritesheet, bool>(sheet, true)));
+					.ForEach(sheet => baseSheets.Add(sheet));
 
 				
 			//set current direction from xml file

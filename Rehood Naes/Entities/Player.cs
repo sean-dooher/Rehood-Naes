@@ -21,18 +21,7 @@ namespace Rehood_Naes.Entities
 	public class Player : Entity
 	{
 		#region Fields
-		private string playerID;
 		private int deathCooldown;
-		#endregion
-		
-		#region Properties	
-		/// <summary>
-		/// Gets ID of player
-		/// </summary>
-		public override string EntityID 
-		{
-			get { return playerID; }
-		}		
 		#endregion
 		
 		#region Constructors
@@ -43,9 +32,8 @@ namespace Rehood_Naes.Entities
 		/// <param name="position">Initial position</param>
 		/// <param name="name">Name of player</param>
 		/// <param name="playerID">ID of player</param>
-		public Player(Area currentArea, Vector2 position, string name, string playerID) : base(currentArea, position, name)
+		public Player(Area currentArea, Vector2 position, string name, string playerID) : base(currentArea, position, name, playerID)
 		{
-			this.playerID = playerID;
 			LoadEntity(position, AppDomain.CurrentDomain.BaseDirectory + @"Content/player/" + playerID + ".xml");
 		}
 		#endregion

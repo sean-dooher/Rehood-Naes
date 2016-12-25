@@ -103,7 +103,7 @@ namespace Rehood_Naes.Building
 		{
 			foreach(var box in elements)
 			{
-				Spritesheet sheet = spritesheets.Where(s => s.SpritesheetID == box.Item3).ToArray().First();
+				Spritesheet sheet = spritesheets.Where (s => s.SpritesheetID == box.Item3).First();
 				spriteBatch.Draw(sheet.Sheet, box.Item2 + Position, box.Item1, Color.White);
 			}
 		}
