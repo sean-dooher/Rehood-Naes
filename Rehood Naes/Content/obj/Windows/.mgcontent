@@ -4,27 +4,32 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/characters/orc_body.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/characters/skeleton_body.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/characters/spear_male.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/characters/spider_black.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/fonts/Arial.spritefont</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/menus/buttons/button1.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/menus/buttons/button1_hover.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/player/body.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/player/boots1.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/player/dagger1.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/player/hair1.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/player/pants1.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/player/torso1.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/base_out_atlas.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/build_atlas.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/caves.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/inside.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/interior.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/obj_misk_atlas.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/spritesheets/terrain_atlas.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/menus/containers/slot.png</File>
-    <File>/home/sean/Projects/RehoodNaes/RehoodNaes/Content/menus/gray_rounded.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/characters/orc_body.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/characters/skeleton_body.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/characters/spear_male.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/characters/spider_black.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/fonts/Arial.spritefont</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/menus/buttons/button1.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/menus/buttons/button1_hover.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/body.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/boots1.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/dagger1.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/hair1.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/pants1.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/player/torso1.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/base_out_atlas.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/build_atlas.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/caves.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/inside.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/interior.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/obj_misk_atlas.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/spritesheets/terrain_atlas.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/menus/gray_rounded.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/menus/containers/default_slot.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/items/bag_items.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/items/Equipment/Armor/0/brown_bangs.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/items/Equipment/Armor/1/brown_longsleeve.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/items/Equipment/Armor/2/white_pants_male.png</File>
+    <File>/home/sean/Documents/Github/Projects/Rehood Naes/Rehood Naes/Content/items/Equipment/Armor/3/black_shoes_male.png</File>
   </SourceFiles>
 </SourceFileCollection>

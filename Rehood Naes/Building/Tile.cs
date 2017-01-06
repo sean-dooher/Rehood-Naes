@@ -21,7 +21,11 @@ namespace Rehood_Naes.Building
 		#region Fields
 
 		private Spritesheet sheet;
-		private List<Rectangle> sourceBoxes;
+		private Rectangle middle;
+		private Rectangle topLeft;
+		private Rectangle topRight;
+		private Rectangle bottomLeft;
+		private Rectangle bottomRight;
 		private Rectangle drawBox;
 		private bool rounded;
 
@@ -34,6 +38,18 @@ namespace Rehood_Naes.Building
 		/// </summary>
 		public Vector2 Size {
 			get { return new Vector2 (drawBox.Width, drawBox.Height); }
+		}
+
+		public Rectangle InnerRectangle
+		{
+			get 
+			{
+				if (rounded)
+					return new Rectangle ((int)Position.X + topLeft.Width, (int)Position.Y + topRight.Width,
+						drawBox.Width - topLeft.Width - topRight.Width, drawBox.Height - topLeft.Height - bottomLeft.Height);
+				else
+					return new Rectangle (Position.ToPoint(), drawBox.Size);
+			}
 		}
 
 		/// <summary>
@@ -66,15 +82,15 @@ namespace Rehood_Naes.Building
 		/// Draws a tile in a certain draw area with a certain tileID and spritesheet(optional)
 		/// </summary>
 		/// <param name="position">Position of draw area</param>
-		/// <param name="Size">Size of draw area</param>
+		/// <param name="size">Size of draw area</param>
 		/// <param name="tileID">ID of tile</param>
 		/// <param name="sheet">Spritesheet for caching</param>
-		public Tile (Vector2 position, Vector2 Size, string tileID, bool rounded = false, Spritesheet sheet = null)
+		public Tile (Vector2 position, Vector2 size, string tileID, bool rounded = false, Spritesheet sheet = null)
 		{
 			this.sheet = sheet;
 			this.rounded = rounded;
 			Position = position;
-			loadTile (new Rectangle ((int)position.X, (int)position.Y, (int)Size.X, (int)Size.Y), tileID);
+			loadTile (new Rectangle (position.ToPoint (), size.ToPoint ()), tileID);
 		}
 
 		#endregion
@@ -89,19 +105,31 @@ namespace Rehood_Naes.Building
 		{
 			if (!rounded)
 			{
-				Rectangle sourceBox = sourceBoxes.First ();
-				for (int i = 0; i < (drawBox.Width / sourceBox.Width) + 1; i++)
-				{
-					for (int j = 0; j < (drawBox.Height / sourceBox.Height) + 1; j++)
+				for (int i = 0; i < (drawBox.Width / middle.Width) + 1; i++)
+					for (int j = 0; j < (drawBox.Height / middle.Height) + 1; j++)
 					{
-						Vector2 newPos = new Vector2 (Position.X + i * sourceBox.Width, Position.Y + j * sourceBox.Height);
-						spriteBatch.Draw (sheet.Sheet, newPos, sourceBox, Color.White);
+						Vector2 newPos = new Vector2 (Position.X + i * middle.Width, Position.Y + j * middle.Height);
+						spriteBatch.Draw (sheet.Sheet, newPos, middle, Color.White);
 					}
-				}
 			}
 			else
 			{
-				
+				//draw middle sections, then add corners
+				//middle functions as two rectangles with a significant overlap
+				Rectangle horizontalBox = new Rectangle((int)Position.X, (int)Position.Y + topLeft.Height,
+					drawBox.Width, drawBox.Height - topLeft.Height - bottomLeft.Height);
+				Rectangle verticalBox = new Rectangle((int)Position.X + topLeft.Width, (int)Position.Y,
+					drawBox.Width - topLeft.Width - topRight.Width, drawBox.Height);
+				spriteBatch.Draw (sheet.Sheet, horizontalBox, middle, Color.White);
+				spriteBatch.Draw (sheet.Sheet, verticalBox, middle, Color.White);
+				//draw corners
+				spriteBatch.Draw(sheet.Sheet, drawBox.Location.ToVector2(), topLeft, Color.White);
+				spriteBatch.Draw(sheet.Sheet, 
+					new Vector2(drawBox.Right - topRight.Width, Position.Y), topRight, Color.White);
+				spriteBatch.Draw (sheet.Sheet,
+					new Vector2 (Position.X, drawBox.Bottom - bottomLeft.Height), bottomLeft, Color.White);
+				spriteBatch.Draw (sheet.Sheet,
+					new Vector2 (drawBox.Right - bottomRight.Width, drawBox.Bottom - bottomRight.Height), bottomRight, Color.White);
 			}
 		}
 
@@ -111,7 +139,7 @@ namespace Rehood_Naes.Building
 		/// <param name="gameTime">Snapshot of timing values</param>
 		public void Update (GameTime gameTime)
 		{
-			
+			//TODO: Add suport for animated tiles (12/27/2016)	
 		}
 
 		#endregion
@@ -126,6 +154,7 @@ namespace Rehood_Naes.Building
 		/// <returns></returns>
 		public static Tile LoadFromXML (XElement tile, List<Spritesheet> sheets = null)
 		{
+			//TODO: add support for rounded tiles from XML
 			Spritesheet tempSheet = null;
 			if (sheets.Count (s => s.SpritesheetID == tile.Element ("Spritesheet").Value) > 0)//if sheets contains element
 				tempSheet = sheets.First (s => s.SpritesheetID == tile.Element ("Spritesheet").Value);
@@ -144,13 +173,21 @@ namespace Rehood_Naes.Building
 		private void loadTile (Rectangle drawBox, string ID)
 		{
 			this.drawBox = drawBox;
-			sourceBoxes = new List<Rectangle> ();
 			string path = AppDomain.CurrentDomain.BaseDirectory + @"Content\tiles\" + ID + ".xml";
 			XDocument doc = XDocument.Load (path);
-			string sheetID = doc.Descendants ("Tile").Descendants ("Spritesheet").ToArray () [0].Value;
+			string sheetID = doc.Descendants ("Spritesheet").First().Value;
 			if (sheet == null || sheet.SpritesheetID != sheetID) //if loaded spritesheet doesn't match
 				sheet = new Spritesheet (sheetID);
-			sourceBoxes.Add(RectangleEx.FromArray (doc.Descendants ("Tile").Descendants ("Box").First ().Value.Split (',')));
+			//add sourceboxes, middle is the sourcebox if it is not rounded
+			middle = RectangleEx.FromArray(doc.Descendants("Middle").Elements("Box").First().Value.Split(','));
+			if (rounded)
+			{
+				topLeft = RectangleEx.FromArray (doc.Descendants ("TopLeft").Elements ("Box").First ().Value.Split (','));
+				topRight = RectangleEx.FromArray (doc.Descendants ("TopRight").Elements ("Box").First ().Value.Split (','));
+				bottomLeft = RectangleEx.FromArray (doc.Descendants ("BottomLeft").Elements ("Box").First ().Value.Split (','));
+				bottomRight = RectangleEx.FromArray (doc.Descendants ("BottomRight").Elements ("Box").First ().Value.Split (','));
+			}
+
 		}
 
 		#endregion

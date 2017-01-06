@@ -25,11 +25,14 @@ namespace Rehood_Naes.Entities
 		private double regenRate;
 		private int strength;
 		private Vector2 initalPosition;
+		Vector2 healthOffset;
 		private Vector2 size;
 		private Vector2 offset;
 		private Area currentArea;
 		private ProgressBar healthBar;
         private string entityID;
+		protected StorageContainer inventory;
+		protected StorageContainer equipment;
 		
 		/// <summary>
 		/// Last position of entity
@@ -79,9 +82,9 @@ namespace Rehood_Naes.Entities
 			{ return sprite.Position + offset; }
 			set 
 			{
-				Vector2 healthOffset = new Vector2((healthBar.Position - Bounds.Center).X, (healthBar.Position - Position).Y);
 				sprite.Position = value - offset;
-				healthBar.Position = new Vector2((Bounds.Center + healthOffset).X, (Position + healthOffset).Y);
+				if (healthBar != null)
+					healthBar.Position = new Vector2 ((Bounds.Center + healthOffset).X, (Position + healthOffset).Y);
 			}
 		}
 
@@ -360,63 +363,72 @@ namespace Rehood_Naes.Entities
 		/// <param name="loadPath">Path to load entity from</param>
 		protected void LoadEntity(Vector2 position, string loadPath)
 		{
-			XDocument entityDoc = XDocument.Load(loadPath);
-			string characterID = entityDoc.Descendants("Entity").Elements("Base").First().Value;
-			maxHealth = int.Parse(entityDoc.Descendants("Entity").Elements("MaxHealth").First().Value);
-			currentHealth = int.Parse(entityDoc.Descendants("Entity").Elements("CurrentHealth").First().Value);
-			strength = int.Parse(entityDoc.Descendants("Entity").Elements("Strength").First().Value);
-			regenRate = double.Parse(entityDoc.Descendants("Entity").Elements("Regen").First().Value)/60;//divide by 60 to make it per second
+			XDocument entityDoc = XDocument.Load (loadPath);
+			var entityXML = entityDoc.Element ("Entity");
+			string characterID = entityXML.Elements ("Base").First ().Value;
+			maxHealth = int.Parse (entityXML.Elements ("MaxHealth").First ().Value);
+			currentHealth = int.Parse (entityXML.Elements ("CurrentHealth").First ().Value);
+			strength = int.Parse (entityXML.Elements ("Strength").First ().Value);
+			regenRate = double.Parse (entityXML.Elements ("Regen").First ().Value) / 60;//divide by 60 to make it per second
+			//load inventory
+
+			if (entityXML.Elements ("InventorySize").Count () != 0)
+				inventory = new StorageContainer (int.Parse (entityXML.Element ("InventorySize").Value));
+			else
+				inventory = new StorageContainer (0);
+
 			
-			List<Spritesheet> defaultOverlay = new List<Spritesheet>(); //TODO: Implement gear system
+			List<Spritesheet> defaultOverlay = new List<Spritesheet> (); //TODO: Implement gear system
 			
 			//load offset and size from xml
-			offset = VectorEx.FromArray(entityDoc.Descendants("Entity").Elements("Offset").First().Value.Split(','));
-			size = VectorEx.FromArray(entityDoc.Descendants("Entity").Elements("Size").First().Value.Split(','));
+			offset = VectorEx.FromArray (entityXML.Elements ("Offset").First ().Value.Split (','));
+			size = VectorEx.FromArray (entityXML.Elements ("Size").First ().Value.Split (','));
 			
 			//add spritesheets and load spritesheet lists
-			foreach(XElement element in entityDoc.Descendants("Entity").Elements("Spritesheet"))
-				defaultOverlay.Add(new Spritesheet(element.Value));
-			foreach(XElement element in entityDoc.Descendants("Entity").Elements("SpriteList"))
-				defaultOverlay.AddRange(Spritesheet.LoadList(element.Value));
+			foreach (XElement element in entityXML.Elements("Spritesheet"))
+				defaultOverlay.Add (new Spritesheet (element.Value));
+			foreach (XElement element in entityXML.Elements("SpriteList"))
+				defaultOverlay.AddRange (Spritesheet.LoadList (element.Value));
 			
 			//create sprite
-			sprite = new CharacterSprite(position - offset, characterID, defaultOverlay);
+			sprite = new CharacterSprite (position - offset, characterID, defaultOverlay);
 			
 			//load healthbar if it has one
-			if(entityDoc.Descendants("Entity").Elements("HealthBar").Count() > 0)
+			if (entityXML.Elements ("HealthBar").Count () > 0)
 			{
-				XElement healthBar = entityDoc.Descendants("Entity").Elements("HealthBar").First();
+				XElement healthBar = entityXML.Elements ("HealthBar").First ();
 				
 				//set colors front document
-				string[] frontString = healthBar.Element("FrontColor").Value.Split(',');
-				string[] backString = healthBar.Element("BackColor").Value.Split(',');
-				Color front = new Color(int.Parse(frontString[0]), int.Parse(frontString[1]), int.Parse(frontString[2]));
-				Color back = new Color(int.Parse(backString[0]), int.Parse(backString[1]), int.Parse(backString[2]));
+				string[] frontString = healthBar.Element ("FrontColor").Value.Split (',');
+				string[] backString = healthBar.Element ("BackColor").Value.Split (',');
+				Color front = new Color (int.Parse (frontString [0]), int.Parse (frontString [1]), int.Parse (frontString [2]));
+				Color back = new Color (int.Parse (backString [0]), int.Parse (backString [1]), int.Parse (backString [2]));
 				
 				//get size and set position
-				int buffer = int.Parse(healthBar.Element("Buffer").Value);
-				Vector2 barSize = VectorEx.FromArray(healthBar.Element("Size").Value.Split(','));
-				Vector2 barPosition = new Vector2(Bounds.Center.X - barSize.X/2, Position.Y - barSize.Y - buffer);
-				this.healthBar = new ProgressBar(barPosition, barSize, maxHealth, (int)currentHealth, front, back);
+				int buffer = int.Parse (healthBar.Element ("Buffer").Value);
+				Vector2 barSize = VectorEx.FromArray (healthBar.Element ("Size").Value.Split (','));
+				Vector2 barPosition = new Vector2 (Bounds.Center.X - barSize.X / 2, Position.Y - barSize.Y - buffer);
+				this.healthBar = new ProgressBar (barPosition, barSize, maxHealth, (int)currentHealth, front, back);
+				healthOffset = new Vector2 ((this.healthBar.Position - Bounds.Center).X, (this.healthBar.Position - Position).Y);
 				
 				On_Move += this.healthBar.Move;
 				On_HealthChanged += this.healthBar.ChangeProgress;
 			}
 			
-			//replace frames if necessary
-			foreach(XElement element in entityDoc.Descendants("Entity").Elements("Frame"))
+			//replace frames if necessary [MOVE TO CHARACTER SPRITE]
+			foreach (XElement element in entityXML.Elements("Frame"))
 			{
 				Enum frameEnum;
-				if(element.Element("Enum").Attribute("type").Value == "SpriteState")
-					frameEnum = (SpriteState)Enum.Parse(typeof(SpriteState), element.Element("Enum").Value);
-				else 
-					frameEnum = (SpriteDirection)Enum.Parse(typeof(SpriteDirection), element.Element("Enum").Value);
-				List<int> frameIndexes = new List<int>();
-				foreach(string index in element.Element("Value").Value.Split(','))
+				if (element.Element ("Enum").Attribute ("type").Value == "SpriteState")
+					frameEnum = (SpriteState)Enum.Parse (typeof(SpriteState), element.Element ("Enum").Value);
+				else
+					frameEnum = (SpriteDirection)Enum.Parse (typeof(SpriteDirection), element.Element ("Enum").Value);
+				List<int> frameIndexes = new List<int> ();
+				foreach (string index in element.Element("Value").Value.Split(','))
 				{
-					frameIndexes.Add(int.Parse(index));
+					frameIndexes.Add (int.Parse (index));
 				}
-				sprite.UpdateFrame(frameEnum, frameIndexes.ToArray());
+				sprite.UpdateFrame (frameEnum, frameIndexes.ToArray ());
 			}
 		}
 		#endregion

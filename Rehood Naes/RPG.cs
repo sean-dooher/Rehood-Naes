@@ -107,6 +107,7 @@ namespace Rehood_Naes
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+			System.Windows.Forms.Application.DoEvents ();
         	if(loadNewGame)
             {
                 //TODO: Make this less hacky, actually read in data from a file

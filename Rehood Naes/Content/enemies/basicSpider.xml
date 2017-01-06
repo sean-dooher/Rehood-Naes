@@ -1,5 +1,7 @@
 ﻿<Entity>
 	<Base>spider</Base>
+	<Spritesheet>spider_black</Spritesheet>
+	<InventorySize>1</InventorySize>
 	<CurrentHealth>30</CurrentHealth>
 	<MaxHealth>30</MaxHealth>
 	<Strength>15</Strength>

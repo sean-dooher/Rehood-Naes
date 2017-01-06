@@ -2,7 +2,6 @@
 	<Speed>.125</Speed>
 	<Direction>South</Direction>
 	<Size>64,64</Size>
-	<Spritesheet>orc_body</Spritesheet>
 	<Frame>
 		<Enum type="SpriteState">Idle</Enum>
 		<Value>0,8</Value>

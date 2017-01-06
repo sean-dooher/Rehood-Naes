@@ -1,9 +1,11 @@
 ﻿<Entity>
-	<Base>orc</Base>
+	<Base>humanoid</Base>
+	<Spritesheet>orc_body</Spritesheet>
 	<Spritesheet>torso1</Spritesheet>
 	<Spritesheet>boots1</Spritesheet>
 	<Spritesheet>pants1</Spritesheet>
 	<Spritesheet>spear_male</Spritesheet>
+	<InventorySize>3</InventorySize>
 	<CurrentHealth>120</CurrentHealth>
 	<MaxHealth>120</MaxHealth>
 	<Strength>30</Strength>

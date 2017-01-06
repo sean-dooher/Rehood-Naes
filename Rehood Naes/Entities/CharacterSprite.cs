@@ -79,7 +79,7 @@ namespace Rehood_Naes.Entities
 		private SpriteDirection currentDirection;
 		private Dictionary<Enum, int[]> frames;//dictionary of frames for current figure
 		private List<Spritesheet> baseSheets;
-		private List<Spritesheet> secondarySheets; //list of spritesheets paired with whether it is a base sheet or not
+		private List<Spritesheet> secondarySheets; //secondary sheets to draw on
 		#endregion
 		
 		#region Properties		
@@ -150,9 +150,11 @@ namespace Rehood_Naes.Entities
 		/// <param name="position">Initial position on screen</param>
 		/// <param name="characterID">ID of character to load</param>
 		/// <param name="spriteSheets">List of non-base(overlay) spritesheets to add(armour, etc)</param>
-		public CharacterSprite(Vector2 position, string characterID, List<Spritesheet> spriteSheets = null)
+		public CharacterSprite(Vector2 position, string characterID, List<Spritesheet> baseSheets, List<Spritesheet> secondarySheets = null)
 		{
-			loadCharacter(position, characterID, spriteSheets);
+			this.baseSheets = baseSheets;
+			this.secondarySheets = secondarySheets == null ? new List<Spritesheet>() : secondarySheets;
+			loadCharacter(position, characterID);
 		}
 		#endregion
 		
@@ -254,12 +256,9 @@ namespace Rehood_Naes.Entities
 		#endregion
 
 		#region Helpers
-		private void loadCharacter(Vector2 position, string characterID,
-		                                              List<Spritesheet> defaultSheets = null)
+		private void loadCharacter(Vector2 position, string characterID)
 		{
 			frames = new Dictionary<Enum, int[]>();
-			baseSheets = new List<Spritesheet>();
-			secondarySheets = new List<Spritesheet>();
 			XDocument charDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"Content/characters/" + characterID + ".xml");
 			
 			//set speed values from xml file
@@ -269,20 +268,6 @@ namespace Rehood_Naes.Entities
 			//set draw rectangle from xml file
 			size = VectorEx.FromArray(charDoc.Descendants("Character").Elements("Size").First().Value.Split(','));
 			this.position = position;
-			
-			//set spritesheets
-			if(defaultSheets != null)
-				defaultSheets.ForEach(sheet => secondarySheets.Add(sheet));
-			
-			//loads individual sheets in character file
-			foreach(XElement element in charDoc.Descendants("Character").Elements("Spritesheet"))
-				baseSheets.Add(new Spritesheet(element.Value));
-			
-			//loads spritelist in character file
-			if(charDoc.Descendants("Character").Elements("SpriteList").Count() > 0)
-				Spritesheet.LoadList(charDoc.Descendants("Character").Elements("SpriteList").First().Value)
-					.ForEach(sheet => baseSheets.Add(sheet));
-
 				
 			//set current direction from xml file
 			currentDirection = (SpriteDirection)Enum.Parse(typeof(SpriteDirection), charDoc.Descendants("Character").Elements("Direction").First().Value);

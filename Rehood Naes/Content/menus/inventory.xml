@@ -1,5 +1,12 @@
-﻿<Container>
-	<SpriteSheet></SpriteSheet>
-	<BackgroundColor></BackgroundColor>
-	<Position></Position>
-</Container>
+﻿<Menu>
+	<SpriteSheet>gray_rounded</SpriteSheet>
+	<Container>
+		<Position>115,180</Position>
+		<Format>Rectangle</Format>
+		<Style>gray_rounded</Style>
+		<Rounded>true</Rounded>
+		<BorderSize>5,5</BorderSize>
+		<Slot>default_slot</Slot>
+		<Columns>6</Columns>
+	</Container>
+</Menu>

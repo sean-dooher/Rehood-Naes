@@ -20,8 +20,8 @@ namespace Rehood_Naes.Menus
 	public class Menu : IDrawable
 	{
 		#region Fields
-		private List<IDrawable> elements;
-		private List<Spritesheet> sheets;
+		protected List<IDrawable> elements;
+		protected List<Spritesheet> sheets;
 		#endregion
 		
 		#region Properties
@@ -93,13 +93,13 @@ namespace Rehood_Naes.Menus
 			MessageBox.Show ("NOT IMPLEMENTED");
 		}
 		
-		private void loadMenu(string menuID)
+		protected void loadMenu(string menuID)
 		{
 			sheets = new List<Spritesheet>();
 			elements = new List<IDrawable>();
 			XDocument doc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"Content\menus\"+menuID+".xml");
 			doc.Descendants("Menu").Elements("Spritesheet").ToList().ForEach(element => sheets.Add(new Spritesheet(element.Value)));
-			foreach(XElement element in doc.Descendants("Menu").Elements("Button"))
+			foreach(XElement element in doc.Descendants("Button"))
 			{
 				string buttonID = element.Elements("ButtonID").First().Value;
 				Vector2 position = VectorEx.FromArray(element.Elements("Position").First().Value.Split(','));
@@ -112,7 +112,7 @@ namespace Rehood_Naes.Menus
 				}
 				elements.Add(temp);
 			}
-			foreach(XElement element in doc.Descendants("Menu").Elements("Elements"))
+			foreach(XElement element in doc.Descendants("Tiles"))
 			{
 				
 			}

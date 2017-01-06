@@ -2,5 +2,7 @@
 	<ID>grass1</ID>
 	<Spritesheet>base_out_atlas</Spritesheet>
 	<Rounded>false</Rounded>
-	<Box>672,160,96,32</Box>
+	<Middle>
+		<Box>672,160,96,32</Box>
+	</Middle>
 </Tile>

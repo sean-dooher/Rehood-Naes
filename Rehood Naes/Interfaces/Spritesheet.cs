@@ -17,6 +17,7 @@ namespace Rehood_Naes.Interfaces
 		#region Field
 		private string sheetID;
 		Texture2D sheet;
+		bool animated = false;
 		private static Dictionary<string, Spritesheet> sheets;
 		#endregion		
 		
@@ -40,30 +41,13 @@ namespace Rehood_Naes.Interfaces
 		
 		#region Constructors
 		/// <summary>
-		/// Creates new spritesheet with given ID and texture
-		/// </summary>
-		/// <param name="sheet">Texture to use</param>
-		/// <param name="spriteID">ID to use</param>
-		public Spritesheet(Texture2D sheet, string spriteID)
-		{
-			sheetID = spriteID;
-			this.sheet = sheet;
-		}
-		
-		/// <summary>
 		/// Loads new spritesheet with given ID
 		/// </summary>
 		/// <param name="spriteID">ID to load</param>
 		public Spritesheet(string spriteID)
 		{
-			try
-			{
-				sheets.Count();
-			}
-			catch
-			{
+			if(sheets == null)
 				sheets = new Dictionary<string, Spritesheet> ();
-			}
 			XDocument listDoc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"Content/spritesheets/sheets.xml");
 			string path = listDoc.Descendants("List").Elements("Spritesheet").First(element => element.Element("ID").Value == spriteID).Element("Path").Value;			
 			sheet = sheets.ContainsKey(spriteID) ? sheets[spriteID].Sheet : RPG.ContentManager.Load<Texture2D>(path);
@@ -87,6 +71,23 @@ namespace Rehood_Naes.Interfaces
 				sheet.Add(new Spritesheet(element.Element("ID").Value));
 			}
 			return sheet;
+		}
+
+		public static Texture2D CropTexture(int x, int y, int width, int height, Texture2D texture)
+		{
+			// Create a new texture of the desired size
+			Texture2D croppedTexture = new Texture2D(texture.GraphicsDevice, width, height);
+
+			// Copy the data from the cropped region into a buffer, then into the new texture
+			Color[] data = new Color[width * height];
+			texture.GetData (0, new Rectangle (x, y, width, height), data, 0, width * height);
+			croppedTexture.SetData(data);
+			return croppedTexture;
+		}
+
+		public static Texture2D CropTexture(Rectangle region, Texture2D texture)
+		{
+			return CropTexture (region.X, region.Y, region.Width, region.Height, texture);
 		}
 		#endregion
 	}

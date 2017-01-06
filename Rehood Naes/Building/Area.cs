@@ -24,6 +24,7 @@ namespace Rehood_Naes.Building
 	{
 		#region Fields
 		private Menu menu;
+		private bool paused = false;
 		private List<IDrawable> drawElements;
 		private List<Entity> entities;
 		private List<EventBox> boxes;
@@ -85,6 +86,16 @@ namespace Rehood_Naes.Building
 		{
 			get{ return sheets; }
 		}
+
+		public Menu AreaMenu
+		{
+			get { return menu; }
+		}
+
+		public bool Paused {
+			get { return paused; }
+			set { paused = value; }
+		}
 		#endregion
 		
 		#region Constructors
@@ -115,25 +126,17 @@ namespace Rehood_Naes.Building
 		/// Updates everything in area based on user input
 		/// </summary>
 		public void Update(GameTime gameTime)
-		{
-			MouseState mouse = Mouse.GetState();
-			KeyboardState keyboard = Keyboard.GetState();
-			
-			if(LastKeyboard.IsKeyDown(Keys.Escape) && keyboard.IsKeyUp(Keys.Escape))//toggle menu with escape key
-				menu.isShowing = !menu.isShowing;
-			
-			RPG.MouseVisible = menu.isShowing; //enable mouse if menu is shown
-			
-			if(!menu.isShowing) //don't update if menu is shown
+		{			
+			if(!Paused) //don't update if menu is shown
 			{	
 				drawElements.ForEach(element => element.Update(gameTime));//update elements
-				User.Update(gameTime);
 				entityUpdates(gameTime);
 			}
 			
-			LastKeyboard = keyboard;
-			LastMouse = mouse;
+			User.Update(gameTime);	
 			menu.Update(gameTime);
+			LastKeyboard = Keyboard.GetState ();
+			LastMouse = Mouse.GetState ();
 		}
 		
 		/// <summary>

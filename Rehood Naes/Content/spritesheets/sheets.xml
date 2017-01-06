@@ -32,29 +32,24 @@
 		<Path>player/body</Path>
 	</Spritesheet>
 	<Spritesheet>
-		<ID>boots1</ID>
-		<Path>player/boots1</Path>
-		<SpriteList>defaultPlayer</SpriteList>
+		<ID>black_shoes_male</ID>
+		<Path>items/Equipment/Armor/3/black_shoes_male</Path>
+		<SpriteList>default_player</SpriteList>
 	</Spritesheet>
 	<Spritesheet>
-		<ID>dagger1</ID>
-		<Path>player/dagger1</Path>
-		<SpriteList>defaultPlayer</SpriteList>
+		<ID>brown_bangs</ID>
+		<Path>items/Equipment/Armor/0/brown_bangs</Path>
+		<SpriteList>default_player</SpriteList>
 	</Spritesheet>
 	<Spritesheet>
-		<ID>hair1</ID>
-		<Path>player/hair1</Path>
-		<SpriteList>defaultPlayer</SpriteList>
+		<ID>white_pants_male</ID>
+		<Path>items/Equipment/Armor/2/white_pants_male</Path>
+		<SpriteList>default_player</SpriteList>
 	</Spritesheet>
 	<Spritesheet>
-		<ID>pants1</ID>
-		<Path>player/pants1</Path>
-		<SpriteList>defaultPlayer</SpriteList>
-	</Spritesheet>
-	<Spritesheet>
-		<ID>torso1</ID>
-		<Path>player/torso1</Path>
-		<SpriteList>defaultPlayer</SpriteList>
+		<ID>brown_longsleeve</ID>
+		<Path>items/Equipment/Armor/1/brown_longsleeve</Path>
+		<SpriteList>default_player</SpriteList>
 	</Spritesheet>
 	<Spritesheet>
 		<ID>button1</ID>
@@ -83,11 +78,15 @@
 		<Path>characters/spider_black</Path>
 	</Spritesheet>
 	<Spritesheet>
-		<ID>slot</ID>
-		<Path>menus/containers/slot</Path>
+		<ID>default_slot</ID>
+		<Path>menus/containers/default_slot</Path>
 	</Spritesheet>
 	<Spritesheet>
 		<ID>gray_rounded</ID>
 		<Path>menus/gray_rounded</Path>
+	</Spritesheet>
+	<Spritesheet>
+		<ID>bag_items</ID>
+		<Path>items/bag_items</Path>
 	</Spritesheet>
 </List>

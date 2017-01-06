@@ -1,6 +1,7 @@
 ﻿<Entity>
 	<Base>skeleton</Base>
-	<Spritesheet>dagger1</Spritesheet>
+	<Spritesheet>skeleton_body</Spritesheet>
+	<InventorySize>3</InventorySize>
 	<CurrentHealth>55</CurrentHealth>
 	<MaxHealth>55</MaxHealth>
 	<Strength>20</Strength>

@@ -1,0 +1,10 @@
+﻿<Entity>
+	<Base>item</Base>
+	<Spritesheet>bag_items</Spritesheet>
+	<CurrentHealth>0</CurrentHealth>
+	<MaxHealth>0</MaxHealth>
+	<Strength>0</Strength>
+	<Regen>0</Regen>
+	<Size>32,32</Size>
+	<Offset>16,16</Offset>
+</Entity>

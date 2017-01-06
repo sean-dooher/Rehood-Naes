@@ -16,6 +16,9 @@ namespace Rehood_Naes.Entities
 		private List<Item> items;
         #endregion
 
+		#region Events
+		#endregion
+
         #region Properties
 		/// <summary>
 		/// Returns an unordered list of items in the container
@@ -53,6 +56,19 @@ namespace Rehood_Naes.Entities
 
         #region Methods
 		/// <summary>
+		/// Updates elements in menu
+		/// </summary>
+		/// <param name="gameTime">Snapshot of timing values</param>
+		public void Update(GameTime gameTime)
+		{
+			foreach (var item in items)
+			{
+				if (item is Item)
+					item.Update (gameTime);
+			}
+		}
+			
+		/// <summary>
 		/// Attempts to add item into a certain slot
 		/// </summary>
 		/// <returns><c>true</c>, if item was added, <c>false</c> otherwise.</returns>
@@ -60,8 +76,14 @@ namespace Rehood_Naes.Entities
 		/// <param name="slot">Slot to attempt to place item in</param>
         public bool AddItem(Item item, int slot)
         {
-			if (slot < 0 || slot >= MaxCapacity || items[slot] != null)
-                return false;
+			if (slot < 0 || slot >= MaxCapacity || items [slot] != null)
+			{
+				if (item.ItemID == items [slot].ItemID)
+				{
+					return items [slot].Add (1);
+				}
+				return false;
+			}
 			items [slot] = item;
             return true;
         }
@@ -73,20 +95,33 @@ namespace Rehood_Naes.Entities
         /// <returns></returns>
         public bool AddItem(Item item)
         {
+			foreach (Item i in items.Where(i => i.ItemID == item.ItemID))
+			{
+				if (i.Count < item.MaxStack || i.MaxStack == -1)
+				{
+					if(i.Add(1))
+						return true;
+				}
+			}
             return AddItem(item, NextOpenSlot());
         }
 
 		/// <summary>
 		/// Removes item from container
 		/// </summary>
-		/// <returns><c>true</c>, if item was removed, <c>false</c> if there is no item in the slot or slot doesn't exist</returns>
+		/// <returns><c>item</c>, if item was removed, <c>null</c> if there is no item in the slot or slot doesn't exist</returns>
 		/// <param name="slot">Slot to remove item from</param>
-		public bool RemoveItem(int slot)
+		public Item RemoveItem(int slot)
 		{
+			Item i = null;
 			if (slot < 0 || slot >= MaxCapacity || items [slot] == null)
-				return false;
-			items [slot] = null;
-			return true;
+				return i;
+			if (items [slot].Count <= 0)
+				items [slot] = null;
+			else
+				i = items [slot].Reduce (1);
+			
+			return i;
 		}
 
 		/// <summary>

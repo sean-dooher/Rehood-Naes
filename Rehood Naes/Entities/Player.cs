@@ -22,6 +22,7 @@ namespace Rehood_Naes.Entities
 	{
 		#region Fields
 		private int deathCooldown;
+		private ContainerMenu inventoryMenu;
 		#endregion
 		
 		#region Constructors
@@ -35,6 +36,7 @@ namespace Rehood_Naes.Entities
 		public Player(Area currentArea, Vector2 position, string name, string playerID) : base(currentArea, position, name, playerID)
 		{
 			LoadEntity(position, AppDomain.CurrentDomain.BaseDirectory + @"Content/player/" + playerID + ".xml");
+			inventoryMenu = new ContainerMenu (inventory, "inventory");
 		}
 		#endregion
 		
@@ -66,12 +68,25 @@ namespace Rehood_Naes.Entities
 		/// <param name="gameTime">Snapshot of times</param>
 		public new void Update(GameTime gameTime)
 		{
-			if(sprite.State != SpriteState.Die)
+			MouseState mouse = Mouse.GetState();
+			KeyboardState keyboard = Keyboard.GetState();
+			KeyboardState lastKeyboard = CurrentArea.LastKeyboard;
+
+			if (keyboard.IsKeyUp (Keys.Escape) && lastKeyboard.IsKeyDown (Keys.Escape))//toggle main menu with escape key
 			{
-				MouseState mouse = Mouse.GetState();
-				KeyboardState keyboard = Keyboard.GetState();
-				KeyboardState lastKeyboard = CurrentArea.LastKeyboard;
-							
+				CurrentArea.AreaMenu.isShowing = !CurrentArea.AreaMenu.isShowing;
+				CurrentArea.Paused = CurrentArea.AreaMenu.isShowing;
+				inventoryMenu.isShowing = false;
+			}
+			if (lastKeyboard.IsKeyDown (Keys.E) && keyboard.IsKeyUp (Keys.E) && !CurrentArea.AreaMenu.isShowing)
+			{
+				inventoryMenu.isShowing = !inventoryMenu.isShowing;
+				CurrentArea.Paused = inventoryMenu.isShowing || CurrentArea.AreaMenu.isShowing;
+			}
+
+			RPG.MouseVisible = CurrentArea.AreaMenu.isShowing || inventoryMenu.isShowing; //enable mouse if menu is shown
+			if(sprite.State != SpriteState.Die && !CurrentArea.Paused)
+			{				
 				Vector2 moveDirection = Vector2.Zero;
 				if(mouse.LeftButton == ButtonState.Pressed)
 					Attack();
@@ -100,23 +115,32 @@ namespace Rehood_Naes.Entities
 		    		Turn(SpriteDirection.East);
 		    		moveDirection.X++;
 		    	}	
-		    	moveDirection.Normalize();
+		    	//keep speed constant
+				moveDirection.Normalize();
+				moveDirection *= 2;
 		    	
+				if (keyboard.IsKeyDown (Keys.F) && lastKeyboard.IsKeyUp (Keys.F))
+					inventory.AddItem (new Item (CurrentArea, Vector2.Zero, 1, Item.ItemState.Bag));
+
 		   		if(keyboard.IsKeyDown(Keys.LeftShift)) 
-		    		moveDirection *= 5; //sprint or speed key
+		    		moveDirection *= 3; //sprint or speed key
 		   		
 		    	if(moveDirection.Length() > 0 && CurrentArea.CheckForCollisions(this, moveDirection))
 		    		Move(moveDirection);
 		    	
-		    	else if(moveDirection.Length() > 0 && keyboard.IsKeyDown(Keys.Space))
+				else if(moveDirection.Length() > 0 && keyboard.IsKeyDown(Keys.Space) && RPG.DebugMode)
 		    		Move(moveDirection);//debug override key
+				this.Position = new Vector2((int)Position.X, (int)Position.Y);
 			}
+	
 			if(sprite.State == SpriteState.Die && sprite.CurrentFrame == sprite.MaxFrame && deathCooldown == 120)
         		RPG.LoadNewGame();
 			else if(sprite.State == SpriteState.Die 
 			        && sprite.CurrentFrame == sprite.MaxFrame && deathCooldown < 120)
 				deathCooldown++;
+
         	base.Update(gameTime);
+			inventoryMenu.Update (gameTime);
 		}
 		
 		/// <summary>
@@ -126,6 +150,7 @@ namespace Rehood_Naes.Entities
 		public new void Draw(SpriteBatch spriteBatch)
 		{
 			base.Draw(spriteBatch);
+			inventoryMenu.Draw (spriteBatch);
 		}
 		#endregion
 	}

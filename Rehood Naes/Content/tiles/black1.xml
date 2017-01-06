@@ -2,5 +2,7 @@
 	<ID>black1</ID>
 	<Spritesheet>terrain_atlas</Spritesheet>
 	<Rounded>false</Rounded>
-	<Box>864,160,1,1</Box>
+	<Middle>
+		<Box>864,160,1,1</Box>
+	</Middle>
 </Tile>

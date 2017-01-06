@@ -46,7 +46,16 @@ namespace Rehood_Naes.Menus
 		{
 			get { return new Vector2(buttonBounds.X, buttonBounds.Y); }
 		}
-		
+
+		public Vector2 Size
+		{
+			get { return new Vector2 (buttonBounds.Width, buttonBounds.Height); }
+		}
+
+		public Rectangle Bounds
+		{
+			get { return buttonBounds; }
+		}
 		/// <summary>
 		/// ID of button
 		/// </summary>
@@ -62,6 +71,7 @@ namespace Rehood_Naes.Menus
 		{
 			get; set;
 		}
+			
 		#endregion
 		
 		#region Constructors
@@ -94,7 +104,7 @@ namespace Rehood_Naes.Menus
 			if(spriteSheets.Count(sheet =>sheet.SpritesheetID == normalID) == 0)
 				spriteSheets.Add(new Spritesheet(normalID));
 			
-			//gt hover image
+			//get hover image
 			hoverID = doc.Descendants("Button").Elements("Hover").First().Value;
 			if(spriteSheets.Count(sheet => sheet.SpritesheetID == hoverID) == 0)
 				spriteSheets.Add(new Spritesheet(hoverID));

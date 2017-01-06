@@ -1,6 +1,8 @@
 ﻿<Entity>
-	<Base>player</Base>
-	<SpriteList>defaultPlayer</SpriteList>
+	<Base>humanoid</Base>
+	<Spritesheet>body</Spritesheet>
+	<SpriteList>default_player</SpriteList>
+	<InventorySize>24</InventorySize>
 	<CurrentHealth>100</CurrentHealth>
 	<MaxHealth>100</MaxHealth>
 	<Strength>25</Strength>

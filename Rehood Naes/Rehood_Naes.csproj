@@ -46,6 +46,9 @@
     </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="gtk-sharp, Version=3.0.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <Package>gtk-sharp-3.0</Package>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -75,6 +78,7 @@
     <Compile Include="Menu\Menu.cs" />
     <Compile Include="Menu\ProgressBar.cs" />
     <Compile Include="Menu\ContainerMenu.cs" />
+    <Compile Include="Interfaces\Animation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -117,16 +121,7 @@
     <None Include="Content\bin\Windows\spritesheets\interior.xnb" />
     <None Include="Content\bin\Windows\spritesheets\obj_misk_atlas.xnb" />
     <None Include="Content\bin\Windows\spritesheets\terrain_atlas.xnb" />
-    <None Include="Content\characters\orc.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Content\characters\orc_body.png" />
-    <None Include="Content\characters\player.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Content\characters\skeleton.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Content\characters\skeleton_body.png" />
     <None Include="Content\characters\spear_male.png" />
     <None Include="Content\characters\spider.xml">
@@ -146,9 +141,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Content\fonts\Arial.spritefont" />
-    <None Include="Content\items\Items.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Content\menus\pausemenu.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -181,14 +173,9 @@
     <None Include="Content\obj\Windows\spritesheets\obj_misk_atlas.mgcontent" />
     <None Include="Content\obj\Windows\spritesheets\terrain_atlas.mgcontent" />
     <None Include="Content\player\body.png" />
-    <None Include="Content\player\boots1.png" />
-    <None Include="Content\player\dagger1.png" />
     <None Include="Content\player\defaultPlayer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\player\hair1.png" />
-    <None Include="Content\player\pants1.png" />
-    <None Include="Content\player\torso1.png" />
     <None Include="Content\spritesheets\base_out_atlas.png" />
     <None Include="Content\spritesheets\build_atlas.png" />
     <None Include="Content\spritesheets\caves.png" />
@@ -248,11 +235,31 @@
     <None Include="Content\menus\inventory.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\menus\containers\slot.png" />
-    <None Include="Content\tiles\gray_menu.xml">
+    <None Include="Content\menus\gray_rounded.png" />
+    <None Include="Content\menus\buttons\default_slot.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Content\menus\gray_rounded.png" />
+    <None Include="Content\menus\containers\default_slot.png" />
+    <None Include="Content\tiles\gray_rounded.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\items\bag_items.png" />
+    <None Include="Content\items\items.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\characters\item.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\items\item_entity.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\characters\humanoid.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\items\Equipment\Armor\3\black_shoes_male.png" />
+    <None Include="Content\items\Equipment\Armor\1\brown_longsleeve.png" />
+    <None Include="Content\items\Equipment\Armor\2\white_pants_male.png" />
+    <None Include="Content\items\Equipment\Armor\0\brown_bangs.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -266,5 +273,14 @@
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <ItemGroup>
     <Folder Include="Content\" />
+    <Folder Include="Content\items\Equipment\" />
+    <Folder Include="Content\items\Equipment\Weapons\" />
+    <Folder Include="Content\items\Equipment\Armor\" />
+    <Folder Include="Content\items\Equipment\Armor\0\" />
+    <Folder Include="Content\items\Equipment\Armor\1\" />
+    <Folder Include="Content\items\Equipment\Armor\2\" />
+    <Folder Include="Content\items\Equipment\Armor\3\" />
+    <Folder Include="Content\items\Equipment\Weapons\4\" />
+    <Folder Include="Content\items\Equipment\Weapons\5\" />
   </ItemGroup>
 </Project>
