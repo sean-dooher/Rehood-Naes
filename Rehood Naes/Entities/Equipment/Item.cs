@@ -10,23 +10,12 @@ using Rehood_Naes.Interfaces;
 
 namespace Rehood_Naes.Entities
 {
-    public class Item : Entity
+    public class Item : IDrawable, IUpdateable
     {
         #region Fields
         #endregion
 
-        #region Properties
-        public enum ItemState
-        {
-            None, Bag, Dropped
-        }
-
-        public ItemState ItemMode
-        {
-            get;
-            protected set;
-        }
-			
+        #region Properties	
         public int ItemID
         {
             get; protected set;
@@ -53,28 +42,38 @@ namespace Rehood_Naes.Entities
 			get;
 			protected set;
 		}
+
+        public int DrawOrder => throw new NotImplementedException();
+
+        public bool Visible => throw new NotImplementedException();
+
+        public bool Enabled => throw new NotImplementedException();
+
+        public int UpdateOrder => throw new NotImplementedException();
         #endregion
 
         #region Constructors
-		public Item(Area currentArea, Vector2 position, int itemID, ItemState mode, int count = 1) :
-		base(currentArea, position, "item" + itemID.ToString(), itemID.ToString())
+        public Item(int itemID, int count = 1)
 		{
-			ItemMode = mode;
 			ItemID = itemID;
 			loadItem (ItemID);
 			Count = count;
-			LoadEntity (position, AppDomain.CurrentDomain.BaseDirectory + @"Content\items\item_entity.xml");
 		}
+
+        public event EventHandler<EventArgs> DrawOrderChanged;
+        public event EventHandler<EventArgs> VisibleChanged;
+        public event EventHandler<EventArgs> EnabledChanged;
+        public event EventHandler<EventArgs> UpdateOrderChanged;
         #endregion
         #region Methods
-		new public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
 		{
 			//TODO: Animation and stuff
 		}
 
-		new public void Draw(SpriteBatch spriteBatch)
+		public void Draw(SpriteBatch spriteBatch)
         {
-			base.Draw (spriteBatch);
+			
         }
 
 		/// <summary>
@@ -82,7 +81,7 @@ namespace Rehood_Naes.Entities
 		/// </summary>
 		/// <param name="count">Amount to increase by</param>
 		/// <returns><c>0</c> if successful, <c>num failed to add</c> if Count + count > MaxStack</returns>
-		public int Add(int count)
+		public int Increase(int count)
 		{
 			if (count > 0)
 			{
@@ -94,14 +93,14 @@ namespace Rehood_Naes.Entities
 		}
 
 		/// <summary>
-		/// Removes count items from the stack
+		/// Removes count items from the stack and returns removed stack
 		/// </summary>
 		/// <param name="count">Count.</param>
-		public Item Reduce(int count)
+		public Item Decrease(int count)
 		{
 			int originalCount = Count;
 			Count = Math.Max (Count - count, 0);
-			return new Item (this.CurrentArea, position, this.ItemID, ItemMode, originalCount - Count + count);
+			return new Item (this.ItemID, originalCount - Count + count);
 		}
         #endregion
 
@@ -113,6 +112,11 @@ namespace Rehood_Naes.Entities
 			MaxStack = int.Parse(itemXML.Element ("MaxStack").Value);
 			EquipSlot = int.Parse (itemXML.Element ("EquipSlot").Value);
 			ItemName = itemXML.Element ("Name").Value;
+        }
+
+        public void Draw(GameTime gameTime)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

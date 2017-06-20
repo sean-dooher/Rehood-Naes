@@ -10,17 +10,16 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using Rehood_Naes.Interfaces;
-using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
-namespace Rehood_Naes.Menus
+namespace Rehood_Naes.Menu
 {
 	/// <summary>
 	/// Menus overlay specific elements and buttons for the user to interact with
 	/// </summary>
-	public class Menu : IDrawable
+	public class Menu : DrawableGameComponent
 	{
 		#region Fields
-		protected List<IDrawable> elements;
+		protected List<IMenuElement> elements;
 		protected List<Spritesheet> sheets;
 		#endregion
 		
@@ -39,7 +38,7 @@ namespace Rehood_Naes.Menus
 		/// Loads a new menu from an id
 		/// </summary>
 		/// <param name="menuID">ID to load from</param>
-		public Menu(string menuID)
+		public Menu(string menuID) : base(RPG.CurrentGame)
 		{
 			loadMenu(menuID);
 		}
@@ -60,10 +59,10 @@ namespace Rehood_Naes.Menus
 		/// Draws menu elements with given SpriteBatch
 		/// </summary>
 		/// <param name="spriteBatch">SpriteBatch used</param>
-		public void Draw(SpriteBatch spriteBatch)
-		{
+		public void Draw(GameTime gameTime)
+        { 
 			if(isShowing)
-				elements.ForEach(element => element.Draw(spriteBatch));
+				elements.ForEach(element => element.Draw(gameTime));
 		}
 		#endregion
 		
@@ -96,7 +95,7 @@ namespace Rehood_Naes.Menus
 		protected void loadMenu(string menuID)
 		{
 			sheets = new List<Spritesheet>();
-			elements = new List<IDrawable>();
+			elements = new List<IMenuElement>();
 			XDocument doc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory + @"Content\menus\"+menuID+".xml");
 			doc.Descendants("Menu").Elements("Spritesheet").ToList().ForEach(element => sheets.Add(new Spritesheet(element.Value)));
 			foreach(XElement element in doc.Descendants("Button"))

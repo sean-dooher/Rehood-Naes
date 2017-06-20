@@ -76,20 +76,22 @@ namespace Rehood_Naes.Entities
 		/// <param name="slot">Slot to attempt to place item in</param>
         public bool AddItem(Item item, int slot)
         {
-			if (slot < 0 || slot >= MaxCapacity || items [slot] != null)
-			{
-				if (item.ItemID == items [slot].ItemID)
-				{
-					return items [slot].Add (1);
-				}
-				return false;
-			}
-			items [slot] = item;
-            return true;
+			if(slot >= 0 && slot < MaxCapacity) // slot is valid
+            {
+                if (items[slot] == null)
+                {
+                    items[slot] = item;
+                    return true;
+                } else if(items[slot].ItemID == item.ItemID)
+                {
+                   
+                }
+            }
+            return false;
         }
 
         /// <summary>
-        /// Adds item into first open slot. Returns true if successfuly
+        /// Adds item into first open slot. Returns true if successfuly adds all items in stack
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -99,7 +101,9 @@ namespace Rehood_Naes.Entities
 			{
 				if (i.Count < item.MaxStack || i.MaxStack == -1)
 				{
-					if(i.Add(1))
+                    int before = item.Count;
+                    item.Decrease(item.Count - i.Increase(item.Count));
+					if(item.Count == 0)
 						return true;
 				}
 			}
@@ -119,7 +123,7 @@ namespace Rehood_Naes.Entities
 			if (items [slot].Count <= 0)
 				items [slot] = null;
 			else
-				i = items [slot].Reduce (1);
+				i = items [slot].Decrease (1);
 			
 			return i;
 		}

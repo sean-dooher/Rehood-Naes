@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C6AA003-7C20-401A-9037-DE14323CE645}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Rehood_Naes</RootNamespace>
+    <AssemblyName>Rehood Naes</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MonoGamePlatform>DesktopGL</MonoGamePlatform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;LINUX</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;LINUX</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>false</Prefer32Bit>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Building\Area.cs" />
+    <Compile Include="Building\Structure.cs" />
+    <Compile Include="Building\Tile.cs" />
+    <Compile Include="Entities\CharacterSprite.cs" />
+    <Compile Include="Entities\Enemy.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Equipment\Armor.cs" />
+    <Compile Include="Entities\Equipment\Effect.cs" />
+    <Compile Include="Entities\Equipment\Item.cs" />
+    <Compile Include="Entities\Equipment\Weapon.cs" />
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\StorageContainer.cs" />
+    <Compile Include="Events\BoxArgs.cs" />
+    <Compile Include="Events\EventBox.cs" />
+    <Compile Include="Interfaces\Animation.cs" />
+    <Compile Include="Interfaces\Extensions.cs" />
+    <Compile Include="Interfaces\RectangleF.cs" />
+    <Compile Include="Interfaces\Spritesheet.cs" />
+    <Compile Include="Menu\Button.cs" />
+    <Compile Include="Menu\ContainerMenu.cs" />
+    <Compile Include="Menu\Menu.cs" />
+    <Compile Include="Menu\MenuElement.cs" />
+    <Compile Include="Menu\ProgressBar.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RPG.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Icon.ico" />
+    <EmbeddedResource Include="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
+      <Link>x86\SDL2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
+      <Link>x64\SDL2.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
+      <Link>x86\soft_oal.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
+      <Link>x64\soft_oal.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
+      <Link>x86\libSDL2-2.0.so.0</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
+      <Link>x64\libSDL2-2.0.so.0</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
+      <Link>x86\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
+      <Link>x64\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
+      <Link>libSDL2-2.0.0.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
+      <Link>libopenal.1.dylib</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
+      <Link>MonoGame.Framework.dll.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="app.manifest" />
+    <None Include="Content\bin\DesktopGL\characters\orc_body.xnb" />
+    <None Include="Content\bin\DesktopGL\characters\skeleton_body.xnb" />
+    <None Include="Content\bin\DesktopGL\characters\spear_male.xnb" />
+    <None Include="Content\bin\DesktopGL\characters\spider_black.xnb" />
+    <None Include="Content\bin\DesktopGL\menus\buttons\button1.xnb" />
+    <None Include="Content\bin\DesktopGL\menus\buttons\button1_hover.xnb" />
+    <None Include="Content\bin\DesktopGL\player\body.xnb" />
+    <None Include="Content\bin\DesktopGL\player\boots1.xnb" />
+    <None Include="Content\bin\DesktopGL\player\dagger1.xnb" />
+    <None Include="Content\bin\Windows\characters\orc_body.xnb" />
+    <None Include="Content\bin\Windows\characters\skeleton_body.xnb" />
+    <None Include="Content\bin\Windows\characters\spear_male.xnb" />
+    <None Include="Content\bin\Windows\characters\spider_black.xnb" />
+    <None Include="Content\bin\Windows\fonts\Arial.xnb" />
+    <None Include="Content\bin\Windows\menus\buttons\button1.xnb" />
+    <None Include="Content\bin\Windows\menus\buttons\button1_hover.xnb" />
+    <None Include="Content\bin\Windows\player\body.xnb" />
+    <None Include="Content\bin\Windows\player\boots1.xnb" />
+    <None Include="Content\bin\Windows\player\dagger1.xnb" />
+    <None Include="Content\bin\Windows\player\hair1.xnb" />
+    <None Include="Content\bin\Windows\player\pants1.xnb" />
+    <None Include="Content\bin\Windows\player\torso1.xnb" />
+    <None Include="Content\bin\Windows\sound\music\himitsuKichi.xnb" />
+    <None Include="Content\bin\Windows\sound\music\nagisaSaka.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\base_out_atlas.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\build_atlas.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\caves.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\inside.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\interior.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\obj_misk_atlas.xnb" />
+    <None Include="Content\bin\Windows\spritesheets\terrain_atlas.xnb" />
+    <None Include="Content\fonts\Arial.spritefont" />
+    <None Include="Content\obj\DesktopGL\characters\orc_body.mgcontent" />
+    <None Include="Content\obj\DesktopGL\characters\skeleton_body.mgcontent" />
+    <None Include="Content\obj\DesktopGL\characters\spear_male.mgcontent" />
+    <None Include="Content\obj\DesktopGL\characters\spider_black.mgcontent" />
+    <None Include="Content\obj\DesktopGL\menus\buttons\button1.mgcontent" />
+    <None Include="Content\obj\DesktopGL\menus\buttons\button1_hover.mgcontent" />
+    <None Include="Content\obj\DesktopGL\player\body.mgcontent" />
+    <None Include="Content\obj\DesktopGL\player\boots1.mgcontent" />
+    <None Include="Content\obj\DesktopGL\player\dagger1.mgcontent" />
+    <None Include="Content\obj\Windows\.mgcontent" />
+    <None Include="Content\obj\Windows\characters\orc_body.mgcontent" />
+    <None Include="Content\obj\Windows\characters\skeleton_body.mgcontent" />
+    <None Include="Content\obj\Windows\characters\spear_male.mgcontent" />
+    <None Include="Content\obj\Windows\characters\spider_black.mgcontent" />
+    <None Include="Content\obj\Windows\fonts\Arial.mgcontent" />
+    <None Include="Content\obj\Windows\menus\buttons\button1.mgcontent" />
+    <None Include="Content\obj\Windows\menus\buttons\button1_hover.mgcontent" />
+    <None Include="Content\obj\Windows\player\body.mgcontent" />
+    <None Include="Content\obj\Windows\player\boots1.mgcontent" />
+    <None Include="Content\obj\Windows\player\dagger1.mgcontent" />
+    <None Include="Content\obj\Windows\player\hair1.mgcontent" />
+    <None Include="Content\obj\Windows\player\pants1.mgcontent" />
+    <None Include="Content\obj\Windows\player\torso1.mgcontent" />
+    <None Include="Content\obj\Windows\sound\music\himitsuKichi.mgcontent" />
+    <None Include="Content\obj\Windows\sound\music\nagisaSaka.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\base_out_atlas.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\build_atlas.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\caves.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\inside.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\interior.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\obj_misk_atlas.mgcontent" />
+    <None Include="Content\obj\Windows\spritesheets\terrain_atlas.mgcontent" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Content\items\Equipment\Weapons\4\" />
+    <Folder Include="Content\items\Equipment\Weapons\5\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\areas\cave1.xml" />
+    <Content Include="Content\areas\forest_cave_entrance.xml" />
+    <Content Include="Content\areas\forest_grave.xml" />
+    <Content Include="Content\areas\house_inside.xml" />
+    <Content Include="Content\areas\house_outside.xml" />
+    <Content Include="Content\bin\Windows\sound\music\himitsuKichi.wma" />
+    <Content Include="Content\bin\Windows\sound\music\nagisaSaka.wma" />
+    <Content Include="Content\characters\humanoid.xml" />
+    <Content Include="Content\characters\item.xml" />
+    <Content Include="Content\characters\orc_body.png" />
+    <Content Include="Content\characters\player.xml" />
+    <Content Include="Content\characters\skeleton.xml" />
+    <Content Include="Content\characters\skeleton_body.png" />
+    <Content Include="Content\characters\spear_male.png" />
+    <Content Include="Content\characters\spider.xml" />
+    <Content Include="Content\characters\spider_black.png" />
+    <Content Include="Content\enemies\advancedOrc.xml" />
+    <Content Include="Content\enemies\basicOrc.xml" />
+    <Content Include="Content\enemies\basicSkeleton.xml" />
+    <Content Include="Content\enemies\basicSpider.xml" />
+    <Content Include="Content\items\bag_items.png" />
+    <Content Include="Content\items\credits.txt" />
+    <Content Include="Content\items\effects.png" />
+    <Content Include="Content\items\Equipment\Armor\0\brown_bangs.png" />
+    <Content Include="Content\items\Equipment\Armor\1\brown_longsleeve.png" />
+    <Content Include="Content\items\Equipment\Armor\2\white_pants_male.png" />
+    <Content Include="Content\items\Equipment\Armor\3\black_shoes_male.png" />
+    <Content Include="Content\items\item_entity.xml" />
+    <Content Include="Content\menus\buttons\button1.png" />
+    <Content Include="Content\menus\buttons\button1.xml" />
+    <Content Include="Content\menus\buttons\button1_hover.png" />
+    <Content Include="Content\menus\buttons\default_slot.xml" />
+    <Content Include="Content\menus\containers\default_slot.png" />
+    <Content Include="Content\menus\equipment_menu.xml" />
+    <Content Include="Content\menus\gray_rounded.png" />
+    <Content Include="Content\menus\inventory.xml" />
+    <Content Include="Content\menus\pausemenu.xml" />
+    <Content Include="Content\player\body.png" />
+    <Content Include="Content\player\boots1.png" />
+    <Content Include="Content\player\dagger1.png" />
+    <Content Include="Content\player\defaultPlayer.xml" />
+    <Content Include="Content\player\hair1.png" />
+    <Content Include="Content\player\pants1.png" />
+    <Content Include="Content\player\torso1.png" />
+    <Content Include="Content\spritesheets\base_out_atlas.png" />
+    <Content Include="Content\spritesheets\build_atlas.png" />
+    <Content Include="Content\spritesheets\caves.png" />
+    <Content Include="Content\spritesheets\inside.png" />
+    <Content Include="Content\spritesheets\interior.png" />
+    <Content Include="Content\spritesheets\obj_misk_atlas.png" />
+    <Content Include="Content\spritesheets\sheets.xml" />
+    <Content Include="Content\spritesheets\terrain_atlas.png" />
+    <Content Include="Content\structures\bed.xml" />
+    <Content Include="Content\structures\bow_wall.xml" />
+    <Content Include="Content\structures\cave_base1.xml" />
+    <Content Include="Content\structures\forest_entrance_floor.xml" />
+    <Content Include="Content\structures\grave1.xml" />
+    <Content Include="Content\structures\house1.xml" />
+    <Content Include="Content\structures\house_floor.xml" />
+    <Content Include="Content\structures\shield_wall.xml" />
+    <Content Include="Content\structures\sink.xml" />
+    <Content Include="Content\structures\sword_wall.xml" />
+    <Content Include="Content\structures\tree1.xml" />
+    <Content Include="Content\structures\tree2.xml" />
+    <Content Include="Content\tiles\black1.xml" />
+    <Content Include="Content\tiles\grass1.xml" />
+    <Content Include="Content\tiles\gray_rounded.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

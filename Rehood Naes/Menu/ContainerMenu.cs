@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Rehood_Naes.Building;
 
-namespace Rehood_Naes.Menus
+namespace Rehood_Naes.Menu
 {
 	public class ContainerMenu : Menu
 	{

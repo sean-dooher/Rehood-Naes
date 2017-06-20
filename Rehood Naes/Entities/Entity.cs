@@ -10,14 +10,13 @@ using Rehood_Naes.Interfaces;
 using Rehood_Naes.Entities;
 using Rehood_Naes.Events;
 using Rehood_Naes.Menus;
-using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
 namespace Rehood_Naes.Entities
 {
 	/// <summary>
 	/// Base class for all entity objects; represents an entity on screen with specific logic
 	/// </summary>
-	public abstract class Entity : IDrawable
+	public abstract class Entity : DrawableGameComponent
 	{
 		#region Fields
 		private double currentHealth;
@@ -185,7 +184,7 @@ namespace Rehood_Naes.Entities
 		/// <param name="startingArea">Area to load entity in</param>
 		/// <param name="position">Position of entity</param>
 		/// <param name="name">Name of entity</param>
-		protected Entity(Area startingArea, Vector2 position, string name, string entityID)
+		protected Entity(Area startingArea, Vector2 position, string name, string entityID) : base(RPG.CurrentGame)
 		{
 			EntityName = name;
             EntityID = entityID;

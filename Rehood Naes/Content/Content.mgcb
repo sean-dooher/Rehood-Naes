@@ -61,12 +61,6 @@
 /processorParam:TextureFormat=Color
 /build:characters/spider_black.png
 
-#begin fonts/Arial.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:fonts/Arial.spritefont
-
 #begin menus/buttons/button1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -330,4 +324,11 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:items/Equipment/Armor/3/black_shoes_male.png
+
+#begin fonts/InterfaceFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/InterfaceFont.spritefont
 

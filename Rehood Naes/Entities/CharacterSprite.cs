@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Rehood_Naes.Interfaces;
-using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
 namespace Rehood_Naes.Entities
 {
@@ -48,7 +47,7 @@ namespace Rehood_Naes.Entities
 	/// SpriteStates: [Length, Row]
 	/// SpriteDirection: [Offset]
 	/// </summary>
-	public class CharacterSprite : IDrawable
+	public class CharacterSprite : IDrawable, IUpdateable
 	{	
 		#region Enums
 		/// <summary>
@@ -80,13 +79,18 @@ namespace Rehood_Naes.Entities
 		private Dictionary<Enum, int[]> frames;//dictionary of frames for current figure
 		private List<Spritesheet> baseSheets;
 		private List<Spritesheet> secondarySheets; //secondary sheets to draw on
-		#endregion
-		
-		#region Properties		
-		/// <summary>
-		/// Returns current frame of animation
-		/// </summary>
-		public int CurrentFrame
+
+        public event EventHandler<EventArgs> DrawOrderChanged;
+        public event EventHandler<EventArgs> VisibleChanged;
+        public event EventHandler<EventArgs> EnabledChanged;
+        public event EventHandler<EventArgs> UpdateOrderChanged;
+        #endregion
+
+        #region Properties		
+        /// <summary>
+        /// Returns current frame of animation
+        /// </summary>
+        public int CurrentFrame
 		{
 			get { return (int)currentColumn; }
 		}
@@ -141,16 +145,24 @@ namespace Rehood_Naes.Entities
 				currentRow = GetFrameInfo(FrameInfo.Row, State, value);
 			}
 		}
-		#endregion
-	
-		#region Constructor
-		/// <summary>
-		/// Creates a character sprite to handle drawing logic
-		/// </summary>
-		/// <param name="position">Initial position on screen</param>
-		/// <param name="characterID">ID of character to load</param>
-		/// <param name="spriteSheets">List of non-base(overlay) spritesheets to add(armour, etc)</param>
-		public CharacterSprite(Vector2 position, string characterID, List<Spritesheet> baseSheets, List<Spritesheet> secondarySheets = null)
+
+        public int DrawOrder => throw new NotImplementedException();
+
+        public bool Visible => throw new NotImplementedException();
+
+        public bool Enabled => throw new NotImplementedException();
+
+        public int UpdateOrder => throw new NotImplementedException();
+        #endregion
+
+        #region Constructor
+        /// <summary>
+        /// Creates a character sprite to handle drawing logic
+        /// </summary>
+        /// <param name="position">Initial position on screen</param>
+        /// <param name="characterID">ID of character to load</param>
+        /// <param name="spriteSheets">List of non-base(overlay) spritesheets to add(armour, etc)</param>
+        public CharacterSprite(Vector2 position, string characterID, List<Spritesheet> baseSheets, List<Spritesheet> secondarySheets = null)
 		{
 			this.baseSheets = baseSheets;
 			this.secondarySheets = secondarySheets == null ? new List<Spritesheet>() : secondarySheets;
@@ -302,6 +314,11 @@ namespace Rehood_Naes.Entities
 			else
 				return -1;
 		}
-		#endregion
-	}
+
+        public void Draw(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+    }
 }

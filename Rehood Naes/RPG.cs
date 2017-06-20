@@ -57,6 +57,10 @@ namespace Rehood_Naes
         /// Whether the mouse should be visible or not
         /// </summary>
         public static bool MouseVisible;
+        public static RPG CurrentGame
+        {
+            get; private set;
+        }
         #endregion
 
         #region Constructors
@@ -68,6 +72,7 @@ namespace Rehood_Naes
             GraphicsManager = graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             ContentManager = Content;
+            CurrentGame = this;
         }
         #endregion
 
