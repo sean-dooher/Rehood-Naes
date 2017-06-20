@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 using Rehood_Naes.Interfaces;
+using IDrawable = Rehood_Naes.Interfaces.IDrawable;
+using IUpdateable = Rehood_Naes.Interfaces.IUpdateable;
 
 namespace Rehood_Naes.Entities
 {
@@ -42,14 +44,6 @@ namespace Rehood_Naes.Entities
 			get;
 			protected set;
 		}
-
-        public int DrawOrder => throw new NotImplementedException();
-
-        public bool Visible => throw new NotImplementedException();
-
-        public bool Enabled => throw new NotImplementedException();
-
-        public int UpdateOrder => throw new NotImplementedException();
         #endregion
 
         #region Constructors
@@ -59,11 +53,6 @@ namespace Rehood_Naes.Entities
 			loadItem (ItemID);
 			Count = count;
 		}
-
-        public event EventHandler<EventArgs> DrawOrderChanged;
-        public event EventHandler<EventArgs> VisibleChanged;
-        public event EventHandler<EventArgs> EnabledChanged;
-        public event EventHandler<EventArgs> UpdateOrderChanged;
         #endregion
         #region Methods
         public void Update(GameTime gameTime)

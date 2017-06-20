@@ -9,6 +9,7 @@ using Rehood_Naes.Interfaces;
 using Rehood_Naes.Entities;
 using Rehood_Naes.Events;
 using Rehood_Naes.Menus;
+using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
 namespace Rehood_Naes.Building
 {
@@ -28,17 +29,14 @@ namespace Rehood_Naes.Building
 		private Rectangle drawBox;
 		private bool rounded;
 
-        public event EventHandler<EventArgs> DrawOrderChanged;
-        public event EventHandler<EventArgs> VisibleChanged;
+		#endregion
 
-        #endregion
+		#region Properties
 
-        #region Properties
-
-        /// <summary>
-        /// Size of draw area
-        /// </summary>
-        public Vector2 Size {
+		/// <summary>
+		/// Size of draw area
+		/// </summary>
+		public Vector2 Size {
 			get { return new Vector2 (drawBox.Width, drawBox.Height); }
 		}
 
@@ -62,21 +60,17 @@ namespace Rehood_Naes.Building
 			private set;
 		}
 
-        public int DrawOrder => throw new NotImplementedException();
+		#endregion
 
-        public bool Visible => throw new NotImplementedException();
+		#region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Draws a tile in a certain draw area with a certain tileID and spritesheet(optional)
-        /// </summary>
-        /// <param name="drawBox"></param>
-        /// <param name="tileID"></param>
-        /// <param name="sheet"></param>
-        public Tile (Rectangle drawBox, string tileID, bool rounded = false, Spritesheet sheet = null)
+		/// <summary>
+		/// Draws a tile in a certain draw area with a certain tileID and spritesheet(optional)
+		/// </summary>
+		/// <param name="drawBox"></param>
+		/// <param name="tileID"></param>
+		/// <param name="sheet"></param>
+		public Tile (Rectangle drawBox, string tileID, bool rounded = false, Spritesheet sheet = null)
 		{
 			this.sheet = sheet;
 			this.rounded = rounded;
@@ -196,11 +190,6 @@ namespace Rehood_Naes.Building
 
 		}
 
-        public void Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
-    }
+		#endregion
+	}
 }

@@ -22,7 +22,7 @@ namespace Rehood_Naes.Entities
 	{
 		#region Fields
 		private int deathCooldown;
-		private ContainerMenu inventoryMenu;
+		//private ContainerMenu inventoryMenu;
 		#endregion
 		
 		#region Constructors
@@ -36,7 +36,7 @@ namespace Rehood_Naes.Entities
 		public Player(Area currentArea, Vector2 position, string name, string playerID) : base(currentArea, position, name, playerID)
 		{
 			LoadEntity(position, AppDomain.CurrentDomain.BaseDirectory + @"Content/player/" + playerID + ".xml");
-			inventoryMenu = new ContainerMenu (inventory, "inventory");
+            //inventoryMenu = new ContainerMenu (inventory, "inventory");
 		}
 		#endregion
 		
@@ -76,15 +76,15 @@ namespace Rehood_Naes.Entities
 			{
 				CurrentArea.AreaMenu.isShowing = !CurrentArea.AreaMenu.isShowing;
 				CurrentArea.Paused = CurrentArea.AreaMenu.isShowing;
-				inventoryMenu.isShowing = false;
+				//inventoryMenu.isShowing = false;
 			}
 			if (lastKeyboard.IsKeyDown (Keys.E) && keyboard.IsKeyUp (Keys.E) && !CurrentArea.AreaMenu.isShowing)
 			{
-				inventoryMenu.isShowing = !inventoryMenu.isShowing;
-				CurrentArea.Paused = inventoryMenu.isShowing || CurrentArea.AreaMenu.isShowing;
+                //inventoryMenu.isShowing = !inventoryMenu.isShowing;
+                CurrentArea.Paused = CurrentArea.AreaMenu.isShowing; // || inventoryMenu.isShowing;
 			}
 
-			RPG.MouseVisible = CurrentArea.AreaMenu.isShowing || inventoryMenu.isShowing; //enable mouse if menu is shown
+            RPG.MouseVisible = CurrentArea.AreaMenu.isShowing; // || inventoryMenu.isShowing; //enable mouse if menu is shown
 			if(sprite.State != SpriteState.Die && !CurrentArea.Paused)
 			{				
 				Vector2 moveDirection = Vector2.Zero;
@@ -118,9 +118,6 @@ namespace Rehood_Naes.Entities
 		    	//keep speed constant
 				moveDirection.Normalize();
 				moveDirection *= 2;
-		    	
-				if (keyboard.IsKeyDown (Keys.F) && lastKeyboard.IsKeyUp (Keys.F))
-					inventory.AddItem (new Item (CurrentArea, Vector2.Zero, 1, Item.ItemState.Bag));
 
 		   		if(keyboard.IsKeyDown(Keys.LeftShift)) 
 		    		moveDirection *= 3; //sprint or speed key
@@ -140,7 +137,7 @@ namespace Rehood_Naes.Entities
 				deathCooldown++;
 
         	base.Update(gameTime);
-			inventoryMenu.Update (gameTime);
+			//inventoryMenu.Update (gameTime);
 		}
 		
 		/// <summary>
@@ -150,7 +147,7 @@ namespace Rehood_Naes.Entities
 		public new void Draw(SpriteBatch spriteBatch)
 		{
 			base.Draw(spriteBatch);
-			inventoryMenu.Draw (spriteBatch);
+			//inventoryMenu.Draw (spriteBatch);
 		}
 		#endregion
 	}

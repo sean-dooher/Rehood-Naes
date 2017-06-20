@@ -58,6 +58,8 @@
     <Compile Include="Events\EventBox.cs" />
     <Compile Include="Interfaces\Animation.cs" />
     <Compile Include="Interfaces\Extensions.cs" />
+    <Compile Include="Interfaces\IDrawable.cs" />
+    <Compile Include="Interfaces\IUpdateable.cs" />
     <Compile Include="Interfaces\RectangleF.cs" />
     <Compile Include="Interfaces\Spritesheet.cs" />
     <Compile Include="Menu\Button.cs" />
@@ -84,50 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
-      <Link>x86\SDL2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\SDL2.dll">
-      <Link>x64\SDL2.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\soft_oal.dll">
-      <Link>x86\soft_oal.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\soft_oal.dll">
-      <Link>x64\soft_oal.dll</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libSDL2-2.0.so.0">
-      <Link>x86\libSDL2-2.0.so.0</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libSDL2-2.0.so.0">
-      <Link>x64\libSDL2-2.0.so.0</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x86\libopenal.so.1">
-      <Link>x86\libopenal.so.1</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
-      <Link>x64\libopenal.so.1</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libSDL2-2.0.0.dylib">
-      <Link>libSDL2-2.0.0.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\libopenal.1.dylib">
-      <Link>libopenal.1.dylib</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll.config">
-      <Link>MonoGame.Framework.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="app.manifest" />
     <None Include="Content\bin\DesktopGL\characters\orc_body.xnb" />
     <None Include="Content\bin\DesktopGL\characters\skeleton_body.xnb" />
@@ -199,26 +157,54 @@
     <Folder Include="Content\items\Equipment\Weapons\5\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\areas\cave1.xml" />
-    <Content Include="Content\areas\forest_cave_entrance.xml" />
-    <Content Include="Content\areas\forest_grave.xml" />
-    <Content Include="Content\areas\house_inside.xml" />
-    <Content Include="Content\areas\house_outside.xml" />
+    <Content Include="Content\areas\cave1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\areas\forest_cave_entrance.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\areas\forest_grave.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\areas\house_inside.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\areas\house_outside.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\bin\Windows\sound\music\himitsuKichi.wma" />
     <Content Include="Content\bin\Windows\sound\music\nagisaSaka.wma" />
-    <Content Include="Content\characters\humanoid.xml" />
-    <Content Include="Content\characters\item.xml" />
+    <Content Include="Content\characters\humanoid.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\characters\item.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\characters\orc_body.png" />
-    <Content Include="Content\characters\player.xml" />
-    <Content Include="Content\characters\skeleton.xml" />
+    <Content Include="Content\characters\player.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\characters\skeleton.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\characters\skeleton_body.png" />
     <Content Include="Content\characters\spear_male.png" />
-    <Content Include="Content\characters\spider.xml" />
+    <Content Include="Content\characters\spider.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\characters\spider_black.png" />
-    <Content Include="Content\enemies\advancedOrc.xml" />
-    <Content Include="Content\enemies\basicOrc.xml" />
-    <Content Include="Content\enemies\basicSkeleton.xml" />
-    <Content Include="Content\enemies\basicSpider.xml" />
+    <Content Include="Content\enemies\advancedOrc.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\basicOrc.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\basicSkeleton.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\enemies\basicSpider.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\items\bag_items.png" />
     <Content Include="Content\items\credits.txt" />
     <Content Include="Content\items\effects.png" />
@@ -226,20 +212,34 @@
     <Content Include="Content\items\Equipment\Armor\1\brown_longsleeve.png" />
     <Content Include="Content\items\Equipment\Armor\2\white_pants_male.png" />
     <Content Include="Content\items\Equipment\Armor\3\black_shoes_male.png" />
-    <Content Include="Content\items\item_entity.xml" />
+    <Content Include="Content\items\item_entity.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\menus\buttons\button1.png" />
-    <Content Include="Content\menus\buttons\button1.xml" />
+    <Content Include="Content\menus\buttons\button1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\menus\buttons\button1_hover.png" />
-    <Content Include="Content\menus\buttons\default_slot.xml" />
+    <Content Include="Content\menus\buttons\default_slot.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\menus\containers\default_slot.png" />
-    <Content Include="Content\menus\equipment_menu.xml" />
+    <Content Include="Content\menus\equipment_menu.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\menus\gray_rounded.png" />
-    <Content Include="Content\menus\inventory.xml" />
-    <Content Include="Content\menus\pausemenu.xml" />
+    <Content Include="Content\menus\inventory.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\menus\pausemenu.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\player\body.png" />
     <Content Include="Content\player\boots1.png" />
     <Content Include="Content\player\dagger1.png" />
-    <Content Include="Content\player\defaultPlayer.xml" />
+    <Content Include="Content\player\defaultPlayer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\player\hair1.png" />
     <Content Include="Content\player\pants1.png" />
     <Content Include="Content\player\torso1.png" />
@@ -249,23 +249,55 @@
     <Content Include="Content\spritesheets\inside.png" />
     <Content Include="Content\spritesheets\interior.png" />
     <Content Include="Content\spritesheets\obj_misk_atlas.png" />
-    <Content Include="Content\spritesheets\sheets.xml" />
+    <Content Include="Content\spritesheets\sheets.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\spritesheets\terrain_atlas.png" />
-    <Content Include="Content\structures\bed.xml" />
-    <Content Include="Content\structures\bow_wall.xml" />
-    <Content Include="Content\structures\cave_base1.xml" />
-    <Content Include="Content\structures\forest_entrance_floor.xml" />
-    <Content Include="Content\structures\grave1.xml" />
-    <Content Include="Content\structures\house1.xml" />
-    <Content Include="Content\structures\house_floor.xml" />
-    <Content Include="Content\structures\shield_wall.xml" />
-    <Content Include="Content\structures\sink.xml" />
-    <Content Include="Content\structures\sword_wall.xml" />
-    <Content Include="Content\structures\tree1.xml" />
-    <Content Include="Content\structures\tree2.xml" />
-    <Content Include="Content\tiles\black1.xml" />
-    <Content Include="Content\tiles\grass1.xml" />
-    <Content Include="Content\tiles\gray_rounded.xml" />
+    <Content Include="Content\structures\bed.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\bow_wall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\cave_base1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\forest_entrance_floor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\grave1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\house1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\house_floor.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\shield_wall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\sink.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\sword_wall.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\tree1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\structures\tree2.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tiles\black1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tiles\grass1.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\tiles\gray_rounded.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

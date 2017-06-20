@@ -3,12 +3,12 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Rehood_Naes.Menu
+namespace Rehood_Naes.Menus
 {
 	/// <summary>
 	/// Two tone progressbar to represent changing values
 	/// </summary>
-	public class ProgressBar : IMenuElement
+	public class ProgressBar
 	{
 		#region Fields
 		private Texture2D frontTexture;
@@ -16,18 +16,13 @@ namespace Rehood_Naes.Menu
 		private Rectangle frontRectangle;
 		private int maxValue;
 		private int currentValue;
+		#endregion
 
-        public event EventHandler<EventArgs> DrawOrderChanged;
-        public event EventHandler<EventArgs> VisibleChanged;
-        public event EventHandler<EventArgs> EnabledChanged;
-        public event EventHandler<EventArgs> UpdateOrderChanged;
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Position of progress bar; can be set publically
-        /// </summary>
-        public Vector2 Position
+		#region Properties
+		/// <summary>
+		/// Position of progress bar; can be set publically
+		/// </summary>
+		public Vector2 Position
 		{
 			get; set;
 		}
@@ -39,27 +34,19 @@ namespace Rehood_Naes.Menu
 		{
 			get; private set;
 		}
-
-        public int DrawOrder => throw new NotImplementedException();
-
-        public bool Visible => throw new NotImplementedException();
-
-        public bool Enabled => throw new NotImplementedException();
-
-        public int UpdateOrder => throw new NotImplementedException();
-        #endregion
-
-        #region Constructors
-        /// <summary>
-        /// Creates a new progress bar with certain colors, poisiton, size, and initial and max amounts
-        /// </summary>
-        /// <param name="position">Position of bar on screen</param>
-        /// <param name="size">Size of bar</param>
-        /// <param name="maxValue">Max value of bar</param>
-        /// <param name="startValue">Starting value of bar</param>
-        /// <param name="front">Front color</param>
-        /// <param name="back">Back color</param>
-        public ProgressBar(Vector2 position, Vector2 size, int maxValue, int startValue, Color front, Color back)
+		#endregion
+		
+		#region Constructors
+		/// <summary>
+		/// Creates a new progress bar with certain colors, poisiton, size, and initial and max amounts
+		/// </summary>
+		/// <param name="position">Position of bar on screen</param>
+		/// <param name="size">Size of bar</param>
+		/// <param name="maxValue">Max value of bar</param>
+		/// <param name="startValue">Starting value of bar</param>
+		/// <param name="front">Front color</param>
+		/// <param name="back">Back color</param>
+		public ProgressBar(Vector2 position, Vector2 size, int maxValue, int startValue, Color front, Color back)
 		{
 			Position = position;	
 			Size = size;
@@ -135,11 +122,6 @@ namespace Rehood_Naes.Menu
 			spriteBatch.Draw(backTexture, Position, Color.White);
 			spriteBatch.Draw(frontTexture, Position, frontRectangle, Color.White);
 		}
-
-        public void Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
-    }
+		#endregion
+	}
 }

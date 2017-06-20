@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using System.Collections.Generic;
 using Rehood_Naes.Building;
 
-namespace Rehood_Naes.Menu
+namespace Rehood_Naes.Menus
 {
 	public class ContainerMenu : Menu
 	{
@@ -67,7 +67,6 @@ namespace Rehood_Naes.Menu
 					Button slot = slots [i];
 					if (item != null)
 					{
-						item.Position = slot.Bounds.Center.ToVector2();
 						item.Draw (spriteBatch);
 					}
 				}

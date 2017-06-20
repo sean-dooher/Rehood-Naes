@@ -6,13 +6,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using Rehood_Naes.Interfaces;
+using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
-namespace Rehood_Naes.Menu
+namespace Rehood_Naes.Menus
 {
 	/// <summary>
 	/// Represents a button to use in a menu
 	/// </summary>
-	public class Button : IMenuElement
+	public class Button : IDrawable
 	{
 		#region Fields
 		private MouseState lastState;
@@ -35,17 +36,13 @@ namespace Rehood_Naes.Menu
 		/// Event to use whenever button is clicked
 		/// </summary>
 		public event ButtonClick On_Click;
-        public event EventHandler<EventArgs> EnabledChanged;
-        public event EventHandler<EventArgs> UpdateOrderChanged;
-        public event EventHandler<EventArgs> DrawOrderChanged;
-        public event EventHandler<EventArgs> VisibleChanged;
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Position of button on screen
-        /// </summary>
-        public Vector2 Position
+		#endregion
+		
+		#region Properties
+		/// <summary>
+		/// Position of button on screen
+		/// </summary>
+		public Vector2 Position
 		{
 			get { return new Vector2(buttonBounds.X, buttonBounds.Y); }
 		}
@@ -74,27 +71,19 @@ namespace Rehood_Naes.Menu
 		{
 			get; set;
 		}
-
-        public bool Enabled => throw new NotImplementedException();
-
-        public int UpdateOrder => throw new NotImplementedException();
-
-        public int DrawOrder => throw new NotImplementedException();
-
-        public bool Visible => throw new NotImplementedException();
-
-        #endregion
-
-        #region Constructors
-        /// <summary>
-        /// Creates new button at a certain position with certain id, text, spritesheets to use for caching, and font
-        /// </summary>
-        /// <param name="position">Position of button</param>
-        /// <param name="buttonText">Text on button</param>
-        /// <param name="buttonID">ID of button</param>
-        /// <param name="sheets">Location of button</param>
-        /// <param name="font">Font to use to write on button</param>
-        public Button(Vector2 position, string buttonText, string buttonID, List<Spritesheet> sheets = null, SpriteFont font = null)
+			
+		#endregion
+		
+		#region Constructors
+		/// <summary>
+		/// Creates new button at a certain position with certain id, text, spritesheets to use for caching, and font
+		/// </summary>
+		/// <param name="position">Position of button</param>
+		/// <param name="buttonText">Text on button</param>
+		/// <param name="buttonID">ID of button</param>
+		/// <param name="sheets">Location of button</param>
+		/// <param name="font">Font to use to write on button</param>
+		public Button(Vector2 position, string buttonText, string buttonID, List<Spritesheet> sheets = null, SpriteFont font = null)
 		{
 			XDocument doc = XDocument.Load(AppDomain.CurrentDomain.BaseDirectory +
 			                               @"Content\menus\buttons\" + buttonID + ".xml");
@@ -122,7 +111,7 @@ namespace Rehood_Naes.Menu
 			
 			//if there is no font loaded, use the default
 			if(textFont == null) 
-				textFont = RPG.ContentManager.Load<SpriteFont>(@"fonts\Arial");
+				textFont = RPG.ContentManager.Load<SpriteFont>(@"fonts\InterfaceFont");
 			
 			lastState = Mouse.GetState();
 		}
@@ -162,11 +151,6 @@ namespace Rehood_Naes.Menu
 			                       new Vector2(buttonBounds.X + buttonBounds.Width/2 - textFont.MeasureString(ButtonText).X/2,
 				                              buttonBounds.Y + buttonBounds.Height/2 -  textFont.MeasureString(ButtonText).Y/2), Color.White);
 		}
-
-        public void Draw(GameTime gameTime)
-        {
-            throw new NotImplementedException();
-        }
-        #endregion
-    }
+		#endregion
+	}
 }

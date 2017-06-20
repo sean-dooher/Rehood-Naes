@@ -6,13 +6,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Rehood_Naes.Interfaces;
+using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
 namespace Rehood_Naes.Building
 {
 	/// <summary>
 	/// Represents a static structure 
 	/// </summary>
-	public class Structure : DrawableGameComponent
+	public class Structure : IDrawable
 	{
 		#region Fields
 		private List<Spritesheet> spritesheets;
@@ -56,7 +57,7 @@ namespace Rehood_Naes.Building
 		/// <param name="y">Vertical position in integers</param>
 		/// <param name="structureID">ID of structure to load</param>
 		/// <param name="spritesheets">Optionally loads spritesheets to reduce memory use</param>
-		public Structure(int x, int y, string structureID, List<Spritesheet> spritesheets = null) : base(RPG.CurrentGame)
+		public Structure(int x, int y, string structureID, List<Spritesheet> spritesheets = null)
 		{
 			Content = RPG.ContentManager;
 			this.spritesheets = new List<Spritesheet>();
@@ -71,7 +72,7 @@ namespace Rehood_Naes.Building
 		/// <param name="position">Position of structure</param>
 		/// <param name="structureID">ID of structure to load</param>
 		/// <param name="spritesheets">Optionally loads spritesheets to reduce memory use</param>
-		public Structure(Vector2 position, string structureID, List<Spritesheet> spritesheets = null) : base(RPG.CurrentGame)
+		public Structure(Vector2 position, string structureID, List<Spritesheet> spritesheets = null)
 		{
 			Content = RPG.ContentManager;
 			this.spritesheets = new List<Spritesheet>();
@@ -79,15 +80,15 @@ namespace Rehood_Naes.Building
 			this.position = position;
 			loadStructure(position, structureID);
 		}
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Moves the structure by a specified amount x and y
-        /// </summary>
-        /// <param name="x">Amount to move horizontally</param>
-        /// <param name="y">Amount to move vertically</param>
-        public void Move(int x, int y)
+		#endregion
+		
+		#region Methods
+		/// <summary>
+		/// Moves the structure by a specified amount x and y
+		/// </summary>
+		/// <param name="x">Amount to move horizontally</param>
+		/// <param name="y">Amount to move vertically</param>
+		public void Move(int x, int y)
 		{
 			position += new Vector2(x,y);
 			for(int i = 0; i < bounds.Count; i++)
@@ -111,9 +112,9 @@ namespace Rehood_Naes.Building
 		/// Update structure for animation, etc
 		/// </summary>
 		/// <param name="gameTime">Snapshot of timing values</param>
-		public override void Update(GameTime gameTime)
+		public void Update(GameTime gameTime)
 		{
-            base.Update(gameTime);
+			
 		}
 		#endregion
 		

@@ -10,13 +10,14 @@ using Rehood_Naes.Interfaces;
 using Rehood_Naes.Entities;
 using Rehood_Naes.Events;
 using Rehood_Naes.Menus;
+using IDrawable = Rehood_Naes.Interfaces.IDrawable;
 
 namespace Rehood_Naes.Entities
 {
 	/// <summary>
 	/// Base class for all entity objects; represents an entity on screen with specific logic
 	/// </summary>
-	public abstract class Entity : DrawableGameComponent
+	public abstract class Entity : IDrawable
 	{
 		#region Fields
 		private double currentHealth;
@@ -30,8 +31,8 @@ namespace Rehood_Naes.Entities
 		private Area currentArea;
 		private ProgressBar healthBar;
         private string entityID;
-		protected StorageContainer inventory;
-		protected StorageContainer equipment;
+		//protected StorageContainer inventory;
+		//protected StorageContainer equipment;
 		
 		/// <summary>
 		/// Last position of entity
@@ -184,7 +185,7 @@ namespace Rehood_Naes.Entities
 		/// <param name="startingArea">Area to load entity in</param>
 		/// <param name="position">Position of entity</param>
 		/// <param name="name">Name of entity</param>
-		protected Entity(Area startingArea, Vector2 position, string name, string entityID) : base(RPG.CurrentGame)
+		protected Entity(Area startingArea, Vector2 position, string name, string entityID)
 		{
 			EntityName = name;
             EntityID = entityID;
@@ -371,10 +372,10 @@ namespace Rehood_Naes.Entities
 			regenRate = double.Parse (entityXML.Elements ("Regen").First ().Value) / 60;//divide by 60 to make it per second
 			//load inventory
 
-			if (entityXML.Elements ("InventorySize").Count () != 0)
-				inventory = new StorageContainer (int.Parse (entityXML.Element ("InventorySize").Value));
-			else
-				inventory = new StorageContainer (0);
+			//if (entityXML.Elements ("InventorySize").Count () != 0)
+			//	inventory = new StorageContainer (int.Parse (entityXML.Element ("InventorySize").Value));
+			//else
+			//	inventory = new StorageContainer (0);
 
 			
 			List<Spritesheet> defaultOverlay = new List<Spritesheet> (); //TODO: Implement gear system
