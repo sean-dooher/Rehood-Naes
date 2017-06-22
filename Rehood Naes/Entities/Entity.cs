@@ -415,7 +415,7 @@ namespace Rehood_Naes.Entities
 				On_HealthChanged += this.healthBar.ChangeProgress;
 			}
 			
-			//replace frames if necessary [MOVE TO CHARACTER SPRITE]
+			//TODO: replace frames if necessary [MOVE TO CHARACTER SPRITE]
 			foreach (XElement element in entityXML.Elements("Frame"))
 			{
 				Enum frameEnum;
